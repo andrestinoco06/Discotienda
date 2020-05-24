@@ -69,5 +69,5 @@ public class Artista implements Serializable {
     }
     
     
-    
+   
 }
