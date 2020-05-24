@@ -90,7 +90,7 @@
 
                 <ul class="nav flex-column bg-white mb-0">
                     <li class="nav-item">
-                        <h:button class="btn btn-light btn-lg btn-block font-italic" value="Crear Archivo" outcome="usuario" onclick="#{administrador.iniciar()}"/>
+                        <h:button class="btn btn-light btn-lg btn-block font-italic" value="Crear Archivo" outcome="usuario" onclick="#{administrador.crearArchivos()}"/>
                     </li>
                     <li class="nav-item">
                         <h:button class="btn btn-lg btn-block font-italic" value="Ver lista" onclick=""/>
@@ -102,71 +102,38 @@
             </div>
             <div class="page-content p-5" id="content">
                 <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Menú</small></button>
-                <p:dataTable id="DT_canciones" value="#{administrador.lista}" var ="cancion" paginator="true" editable="true">
-                <f:facet name="header">
-                    Row Editing
-                </f:facet>
+                
+                <p:dataTable id="DT_canciones" value="#{administrador.lista}" var ="cancion" paginator="true" editable="true" >
+                    
+                    <f:facet name="header">
+                        ARTISTAS
+                    </f:facet>
 
-                <!--<p:ajax event="rowEdit" listener="#{table.onRowEdit}" update=":form:msgs" />
-                <p:ajax event="rowEditCancel" listener="#{table.onRowCancel}" update=":form:msgs" />-->
-
-                <p:column headerText="Nombre">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{cancion.nombreArtistico}" /></f:facet>
-                        <f:facet name="input"><p:inputText id="I_nombre" required="true" value="#{cancion.nombreArtistico}" style="width:100%"/></f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <!--<p:column headerText="Duración">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{cancion.duracion}" /></f:facet>
-                        <f:facet name="input">
-                            <p:inputText required="true" type="number" id="I_cancion" value="#{cancion.duracion}" style="width:100%">
-                                <f:validateDoubleRange minimum="1" maximum="1000"/>
-                            </p:inputText>
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Disco">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{cancion.disco}" /></f:facet>
-                        <f:facet name="input"><p:inputText id="I_disco" type="text" required="true" value="#{cancion.disco}" style="width:100%"/></f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="NombreArtista">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{cancion.nombreArtista}" /></f:facet>
-                        <f:facet name="input"><p:inputText id="I_nombreA" required="true" value="#{cancion.nombreArtista}" style="width:100%"/></f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Formato">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{cancion.formato}" /></f:facet>
-                        <f:facet name="input">
-                            <p:selectOneListbox id="I_formato" required="true" value="#{cancion.formato}" style="width:100%">
-                                <f:selectItem itemValue="MP4" itemLabel="MP4" />
-                                <f:selectItem itemValue="WMV" itemLabel="WMV" />
-                                <f:selectItem itemValue="AVI" itemLabel="AVI" />
-                            </p:selectOneListbox> 
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Precio">
-                    <p:cellEditor>
-                        <f:facet name="output"><h:outputText value="#{cancion.precio}" /></f:facet>
-                        <f:facet name="input">
-                            <p:inputText type="number" id="I_precio" required="true" value="#{cancion.precio}" style="width:100%">
-                                <f:validateDoubleRange minimum="10000" maximum="30000"/>
-                            </p:inputText>
-                        </f:facet>
-                    </p:cellEditor>
-                </p:column>
-                <p:column headerText="Editar" style="white-space: normal">
-                    <p:rowEditor />
-                </p:column>                 
-                <p:column headerText="Eliminar">
-                    <h:commandButton value="Eliminar" actionListener="#{table.eliminar(cancion)}"/>
-                </p:column>-->
-            </p:dataTable>
+                    <p:column headerText="Nombre Artístico">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{cancion.nombreArtistico}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_nombreA" required="true" value="#{cancion.nombreArtistico}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Nombre Nacimiento">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{cancion.nombreNacimiento}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_nombreN" required="true" value="#{cancion.nombreNacimiento}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Fecha de Nacimiento">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{cancion.fechaNacimiento}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_fechaN" required="true" value="#{cancion.fechaNacimiento}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Genero">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{cancion.genero}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_genero" required="true" value="#{cancion.genero}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                </p:dataTable>
             </div>
 
         </h:form>

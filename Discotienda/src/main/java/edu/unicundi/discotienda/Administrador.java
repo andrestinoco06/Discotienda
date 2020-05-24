@@ -36,12 +36,16 @@ public class Administrador implements Serializable{
         
     }
     
-    public void iniciar(){
+    public void crearArchivos(){
+        
         try {
             new lecturaEscrituraArtista().crearArchivo();
         } catch (ParseException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        
     }
     
     @Inject

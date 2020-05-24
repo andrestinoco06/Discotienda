@@ -17,16 +17,26 @@ public class Disco {
     private int idArtista;
     private long precio;
     private Date fechaPublicacion;
-    private int[] genero;
+    private String genero;
     private long duracion;
+    private String nombreDisco;
 
-    public Disco(int id, int idArtista, long precio, Date fechaPublicacion, int[] genero, long duracion) {
+    public Disco(int id, int idArtista, long precio, Date fechaPublicacion, String genero, long duracion, String nombreDisco) {
         this.id = id;
         this.idArtista = idArtista;
         this.precio = precio;
         this.fechaPublicacion = fechaPublicacion;
         this.genero = genero;
         this.duracion = duracion;
+        this.nombreDisco = nombreDisco;
+    }
+
+    public String getNombreDisco() {
+        return nombreDisco;
+    }
+
+    public void setNombreDisco(String nombreDisco) {
+        this.nombreDisco = nombreDisco;
     }
 
     public int getId() {
@@ -61,11 +71,11 @@ public class Disco {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public int[] getGenero() {
+    public String getGenero() {
         return genero;
     }
 
-    public void setGenero(int[] genero) {
+    public void setGenero(String genero) {
         this.genero = genero;
     }
 
