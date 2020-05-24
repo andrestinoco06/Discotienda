@@ -5,23 +5,24 @@
  */
 package edu.unicundi.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author johan
  */
-public class Disco {
+public class Disco implements Serializable{
     
     private int id;
     private int idArtista;
     private long precio;
-    private Date fechaPublicacion;
+    private String fechaPublicacion;
     private String genero;
     private long duracion;
     private String nombreDisco;
 
-    public Disco(int id, int idArtista, long precio, Date fechaPublicacion, String genero, long duracion, String nombreDisco) {
+    public Disco(int id, int idArtista, long precio, String fechaPublicacion, String genero, long duracion, String nombreDisco) {
         this.id = id;
         this.idArtista = idArtista;
         this.precio = precio;
@@ -63,11 +64,11 @@ public class Disco {
         this.precio = precio;
     }
 
-    public Date getFechaPublicacion() {
+    public String getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(Date fechaPublicacion) {
+    public void setFechaPublicacion(String fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
@@ -85,8 +86,5 @@ public class Disco {
 
     public void setDuracion(long duracion) {
         this.duracion = duracion;
-    }
-    
-    
-    
+    }   
 }

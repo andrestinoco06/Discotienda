@@ -6,8 +6,11 @@
 package edu.unicundi.discotienda;
 
 import edu.unicundi.lecturaEscritura.lecturaEscrituraArtista;
+import edu.unicundi.lecturaEscritura.lecturaEscrituraDisco;
 import edu.unicundi.logic.ServiceArtista;
+import edu.unicundi.logic.ServiceDisco;
 import edu.unicundi.model.Artista;
+import edu.unicundi.model.Disco;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,37 +34,43 @@ import javax.inject.Named;
 public class Administrador implements Serializable{
     
     private List<Artista> listaArtista;
+    private List<Disco> listaDiscos;
 
     public Administrador(){
         
     }
     
-    public void crearArchivos(){
-        
-        try {
-            new lecturaEscrituraArtista().crearArchivo();
-        } catch (ParseException ex) {
-            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        
-    }
+    @Inject
+    private ServiceArtista serviceArtista;
     
     @Inject
-    private ServiceArtista service;
+    private ServiceDisco serviceDisco;
+    
     
     @PostConstruct
     public void init() {
-        this.listaArtista = service.getListaArtista();
+        this.listaArtista = serviceArtista.getListaArtista();
+        this.listaDiscos = serviceDisco.getListaDiscos();
     }
-
-    public List<Artista> getLista() {
+    
+    public void crearArchivos(){
+        new lecturaEscrituraArtista().crearArchivo();
+        new lecturaEscrituraDisco().crearArchivo();
+    }
+    
+    public List<Artista> getListaArtista() {
         return listaArtista;
     }
 
-    public void setLista(List<Artista> lista) {
-        this.listaArtista = lista;
+    public void setListaArtista(List<Artista> listaArtista) {
+        this.listaArtista = listaArtista;
     }
-    
+
+    public List<Disco> getListaDiscos() {
+        return listaDiscos;
+    }
+
+    public void setListaDiscos(List<Disco> listaDiscos) {
+        this.listaDiscos = listaDiscos;
+    }
 }

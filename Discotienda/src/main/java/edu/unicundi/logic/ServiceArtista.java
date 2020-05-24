@@ -18,14 +18,14 @@ import javax.inject.Named;
  *
  * @author johan
  */
-@Named(value = "serviceCancion")
+@Named(value = "serviceArtista")
 @RequestScoped
 public class ServiceArtista {
     
     private List<Artista> listaArtista;
     
     public ServiceArtista(){
-        listaArtista = new ArrayList<>();
+        
     }
     
     @PostConstruct

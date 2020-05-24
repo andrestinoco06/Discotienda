@@ -101,9 +101,12 @@
                 </ul>
             </div>
             <div class="page-content p-5" id="content">
-                <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Menú</small></button>
+                <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
+                    <i class="fa fa-bars mr-2"></i>
+                    <small class="text-uppercase font-weight-bold">Menú</small>
+                </button>
                 
-                <p:dataTable id="DT_canciones" value="#{administrador.lista}" var ="cancion" paginator="true" editable="true" >
+                <p:dataTable id="DT_artistas" value="#{administrador.listaArtista}" var ="artista" paginator="true" editable="true" >
                     
                     <f:facet name="header">
                         ARTISTAS
@@ -111,29 +114,62 @@
 
                     <p:column headerText="Nombre Artístico">
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{cancion.nombreArtistico}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="I_nombreA" required="true" value="#{cancion.nombreArtistico}" style="width:100%"/></f:facet>
+                            <f:facet name="output"><h:outputText value="#{artista.nombreArtistico}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_nombreA" required="true" value="#{artista.nombreArtistico}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
                     <p:column headerText="Nombre Nacimiento">
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{cancion.nombreNacimiento}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="I_nombreN" required="true" value="#{cancion.nombreNacimiento}" style="width:100%"/></f:facet>
+                            <f:facet name="output"><h:outputText value="#{artista.nombreNacimiento}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_nombreN" required="true" value="#{artista.nombreNacimiento}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
                     <p:column headerText="Fecha de Nacimiento">
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{cancion.fechaNacimiento}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="I_fechaN" required="true" value="#{cancion.fechaNacimiento}" style="width:100%"/></f:facet>
+                            <f:facet name="output"><h:outputText value="#{artista.fechaNacimiento}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_fechaN" required="true" value="#{artista.fechaNacimiento}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
                     <p:column headerText="Genero">
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{cancion.genero}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="I_genero" required="true" value="#{cancion.genero}" style="width:100%"/></f:facet>
+                            <f:facet name="output"><h:outputText value="#{artista.genero}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_genero" required="true" value="#{artista.genero}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
                 </p:dataTable>
+                
+                <p:dataTable id="DT_discos" value="#{administrador.listaDiscos}" var ="discos" paginator="true" editable="true" >
+                    
+                    <f:facet name="header">
+                        DISCOS
+                    </f:facet>
+
+                    <p:column headerText="Nombre">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{discos.nombreDisco}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_nombreA" required="true" value="#{discos.nombreDisco}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Fecha publicacion">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{discos.fechaPublicacion}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_nombreN" required="true" value="#{discos.fechaPublicacion}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Precio">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{discos.precio}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_fechaN" required="true" value="#{discos.precio}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Duración">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{discos.duracion}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_genero" required="true" value="#{discos.duracion}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                </p:dataTable>
+                
             </div>
 
         </h:form>

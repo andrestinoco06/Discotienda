@@ -18,9 +18,9 @@ public class Artista implements Serializable {
     private String nombreArtistico;
     private String nombreNacimiento;
     private String genero;
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
 
-    public Artista(int id, String nombreArtistico, String nombreNacimiento, String genero, Date fechaNacimiento) {
+    public Artista(int id, String nombreArtistico, String nombreNacimiento, String genero, String fechaNacimiento) {
         this.id = id;
         this.nombreArtistico = nombreArtistico;
         this.nombreNacimiento = nombreNacimiento;
@@ -60,11 +60,11 @@ public class Artista implements Serializable {
         this.genero = genero;
     }
 
-    public Date getFechaNacimiento() {
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
     

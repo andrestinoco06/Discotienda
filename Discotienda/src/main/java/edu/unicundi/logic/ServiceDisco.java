@@ -5,6 +5,11 @@
  */
 package edu.unicundi.logic;
 
+import edu.unicundi.lecturaEscritura.lecturaEscrituraDisco;
+import edu.unicundi.model.Disco;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
@@ -15,5 +20,22 @@ import javax.inject.Named;
 @Named(value = "serviceDisco")
 @RequestScoped
 public class ServiceDisco {
+    List<Disco> listaDisco;
     
+    public ServiceDisco(){
+        
+    }
+    
+    @PostConstruct
+    public void init() {
+        listaDisco = new lecturaEscrituraDisco().verDiscos();
+    }
+
+    public List<Disco> getListaDiscos() {
+        return listaDisco;
+    }
+
+    public void setListaDiscos(List<Disco> listaDisco) {
+        this.listaDisco = listaDisco;
+    }
 }
