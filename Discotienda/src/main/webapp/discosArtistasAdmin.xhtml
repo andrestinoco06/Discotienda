@@ -5,8 +5,8 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-
-        <title>Administrador</title>
+        
+        <title>Discos Artistas </title>
         <h:outputStylesheet library="css" name="bootstrap.css" />
         <h:outputScript library="js" name="bootstrap.js" />
         <h:outputScript library="js" name="jquery-3.5.0.min.js" />
@@ -72,7 +72,9 @@
         </style>
 
     </h:head>
-
+        <f:metadata>
+            <f:viewParam name="artista" value="#{discosArtistaAdmin.idArtista}"/>
+        </f:metadata>
     <h:body>
         <h:form>
 
@@ -106,40 +108,36 @@
                     <small class="text-uppercase font-weight-bold">Menú</small>
                 </button>
 
-                <p:dataTable id="DT_artistas" value="#{administrador.listaArtista}" var ="artista" paginator="true" editable="true" >
-
+                <p:dataTable id="DT_discos" value="#{discosArtistaAdmin.listaDiscos}" var ="discos" paginator="true" editable="true" >
                     <f:facet name="header">
-                        ARTISTAS
+                        DISCOS
                     </f:facet>
-
-                    <p:column headerText="Nombre Artístico">
+                    <p:column headerText="Nombre">
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{artista.nombreArtistico}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="I_nombreA" required="true" value="#{artista.nombreArtistico}" style="width:100%"/></f:facet>
+                            <f:facet name="output"><h:outputText value="#{discos.nombreDisco}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_nombreA" required="true" value="#{discos.nombreDisco}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Nombre Nacimiento">
+                    <p:column headerText="Fecha publicacion">
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{artista.nombreNacimiento}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="I_nombreN" required="true" value="#{artista.nombreNacimiento}" style="width:100%"/></f:facet>
+                            <f:facet name="output"><h:outputText value="#{discos.fechaPublicacion}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_nombreN" required="true" value="#{discos.fechaPublicacion}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Fecha de Nacimiento">
+                    <p:column headerText="Precio">
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{artista.fechaNacimiento}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="I_fechaN" required="true" value="#{artista.fechaNacimiento}" style="width:100%"/></f:facet>
+                            <f:facet name="output"><h:outputText value="#{discos.precio}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_fechaN" required="true" value="#{discos.precio}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Genero">
+                    <p:column headerText="Duración">
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{artista.genero}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="I_genero" required="true" value="#{artista.genero}" style="width:100%"/></f:facet>
+                            <f:facet name="output"><h:outputText value="#{discos.duracion}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_genero" required="true" value="#{discos.duracion}" style="width:100%"/></f:facet>
                         </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Ver discos..">
-                        <h:commandButton value="Ver discos..." actionListener="#{administrador.verDiscosArtista(artista)}"/>
                     </p:column>
                 </p:dataTable>
+
             </div>
 
         </h:form>

@@ -20,6 +20,7 @@ import javax.inject.Named;
 @Named(value = "serviceDisco")
 @RequestScoped
 public class ServiceDisco {
+    
     List<Disco> listaDisco;
     
     public ServiceDisco(){

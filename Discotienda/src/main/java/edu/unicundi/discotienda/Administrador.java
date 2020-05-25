@@ -17,11 +17,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -34,8 +36,7 @@ import javax.inject.Named;
 public class Administrador implements Serializable{
     
     private List<Artista> listaArtista;
-    private List<Disco> listaDiscos;
-
+    
     public Administrador(){
         
     }
@@ -43,14 +44,17 @@ public class Administrador implements Serializable{
     @Inject
     private ServiceArtista serviceArtista;
     
-    @Inject
-    private ServiceDisco serviceDisco;
-    
-    
     @PostConstruct
     public void init() {
         this.listaArtista = serviceArtista.getListaArtista();
-        this.listaDiscos = serviceDisco.getListaDiscos();
+    }
+    
+    public void verDiscosArtista(Artista artista){
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("discosArtistasAdmin.xhtml?artista="+artista.getId());
+        } catch (IOException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void crearArchivos(){
@@ -64,13 +68,5 @@ public class Administrador implements Serializable{
 
     public void setListaArtista(List<Artista> listaArtista) {
         this.listaArtista = listaArtista;
-    }
-
-    public List<Disco> getListaDiscos() {
-        return listaDiscos;
-    }
-
-    public void setListaDiscos(List<Disco> listaDiscos) {
-        this.listaDiscos = listaDiscos;
     }
 }

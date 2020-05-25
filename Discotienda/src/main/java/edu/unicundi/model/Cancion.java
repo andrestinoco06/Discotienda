@@ -18,16 +18,26 @@ public class Cancion implements Serializable {
     private int idDisco;
     private String nombreDisco;
     private long duracionCancion;
-    private Date fechaPublicacion;
-    private int[] genero;
+    private String fechaPublicacion;
+    private String genero;
+    private long precio;
 
-    public Cancion(int id, int idDisco, String nombreDisco, long duracionCancion, Date fechaPublicacion, int[] genero) {
+    public Cancion(int id, int idDisco, String nombreDisco, long duracionCancion, String fechaPublicacion, String genero, long precio) {
         this.id = id;
         this.idDisco = idDisco;
         this.nombreDisco = nombreDisco;
         this.duracionCancion = duracionCancion;
         this.fechaPublicacion = fechaPublicacion;
         this.genero = genero;
+        this.precio = precio;
+    }
+
+    public long getPrecion() {
+        return precio;
+    }
+
+    public void setPrecion(long precio) {
+        this.precio = precio;
     }
 
     public int getId() {
@@ -62,19 +72,19 @@ public class Cancion implements Serializable {
         this.duracionCancion = duracionCancion;
     }
 
-    public Date getFechaPublicacion() {
+    public String getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(Date fechaPublicacion) {
+    public void setFechaPublicacion(String fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public int[] getGenero() {
+    public String getGenero() {
         return genero;
     }
 
-    public void setGenero(int[] genero) {
+    public void setGenero(String genero) {
         this.genero = genero;
     }
     
