@@ -31,7 +31,6 @@ public class ServiceArtista {
     @PostConstruct
     public void init() {
         System.out.println(" entro al POSTconstructor SERVICE");
-        
         listaArtista = new lecturaEscrituraArtista().verArtistas();
     }
     

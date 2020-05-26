@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -33,7 +34,7 @@ import javax.inject.Named;
  * @author johan
  */
 @Named(value = "administrador")
-@ViewScoped 
+@SessionScoped 
 public class Administrador implements Serializable{
     
     private List<Artista> listaArtista;
@@ -59,6 +60,7 @@ public class Administrador implements Serializable{
     
     public void verDiscosArtista(Artista artista){
         try {
+            id = artista.getId();
             FacesContext.getCurrentInstance().getExternalContext().redirect("discosArtistasAdmin.xhtml?artista="+artista.getId());
         } catch (IOException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,13 +77,7 @@ public class Administrador implements Serializable{
         new lecturaEscrituraArtista().agregarArtista(listaArtista);
     }
     
-    public String crearArchivos(){
-        System.out.println("entro al metodo crearARCHIVOS -------- ADMIN");
-        serviceArtista.crearArtista();
-        //new lecturaEscrituraArtista().crearArchivo();
-        //new lecturaEscrituraDisco().crearArchivo();
-        return "administrador.xhtml";
-    }
+    
     
     public List<Artista> getListaArtista() {
         return listaArtista;

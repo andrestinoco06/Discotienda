@@ -23,7 +23,7 @@ import javax.inject.Named;
  *
  * @author johan
  */
-@Named(value = "discosArtistaAdmin")
+@Named(value = "discosArAd")
 @ViewScoped
 public class DiscosArtistasAdmin implements Serializable {
 
@@ -32,7 +32,7 @@ public class DiscosArtistasAdmin implements Serializable {
     private List<Disco> listaDiscos;
 
     public DiscosArtistasAdmin() {
-
+        System.out.println(" -  - -- - - entro al constructor DISCOS ");
     }
 
     @Inject
@@ -41,10 +41,6 @@ public class DiscosArtistasAdmin implements Serializable {
     @PostConstruct
     public void init() {
         cargarDiscos();
-    }
-
-    public int getIdArtista() {
-        return idArtista;
     }
 
     public void cargarDiscos() {
@@ -65,10 +61,6 @@ public class DiscosArtistasAdmin implements Serializable {
         listaDiscos = listaBusqueda;
     }
 
-    public void setIdArtista(int idArtista) {
-        this.idArtista = idArtista;
-    }
-
     public List<Disco> getListaDiscos() {
         return listaDiscos;
     }
@@ -77,4 +69,14 @@ public class DiscosArtistasAdmin implements Serializable {
         this.listaDiscos = listaDiscos;
     }
 
+    public int getIdArtista() {
+        return idArtista;
+    }
+
+    public void setIdArtista(int idArtista) {
+        this.idArtista = idArtista;
+    }
+
+    
+    
 }

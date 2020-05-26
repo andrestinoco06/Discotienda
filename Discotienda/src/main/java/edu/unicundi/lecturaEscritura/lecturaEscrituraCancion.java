@@ -23,12 +23,7 @@ import java.util.logging.Logger;
  * @author johan
  */
 public class lecturaEscrituraCancion {
-    public void crearArchivo() {
-        List<Cancion> lista = new ArrayList<>();
-        lista.add(new Cancion(1, 3, "Chantaje", 195, "28-10-2016" , "POP LATINO-REGUETON", 35000));
-        lista.add(new Cancion(2, 3, "La bicicleta", 228, "27-05-2016" , "POP LATINO-REGUETON", 40000));
-        lista.add(new Cancion(3, 2, "Locked Out of Heaven", 233, "01-10-2012" , "ROCK", 33000));
-        
+    public void crearArchivo(List<Cancion> lista) {
         try {
             FileOutputStream fos = new FileOutputStream("C:\\Users\\johan\\Desktop\\Ingenieria de Sistemas\\Linea de profundizacion I\\RepositoriosCompartidos\\Discotienda\\ACancion.txt");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -49,8 +44,13 @@ public class lecturaEscrituraCancion {
         FileInputStream fis = null;
         try {
             fis = new FileInputStream("C:\\Users\\johan\\Desktop\\Ingenieria de Sistemas\\Linea de profundizacion I\\RepositoriosCompartidos\\Discotienda\\ACancion.txt");
-            ObjectInputStream listaEntrada = new ObjectInputStream(fis);
-            listaL = (List<Cancion>) listaEntrada.readObject();
+            if(fis != null){
+                System.out.println("Entro a pesar de que no existe");
+                ObjectInputStream listaEntrada = new ObjectInputStream(fis);
+                listaL = (List<Cancion>) listaEntrada.readObject();
+            }else{
+                System.out.println("NO ENCONTRO ARTISTA, NO EXISTE EL ARCHIVO");
+            }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

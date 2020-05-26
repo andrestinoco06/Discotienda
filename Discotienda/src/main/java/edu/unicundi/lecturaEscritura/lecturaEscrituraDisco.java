@@ -24,25 +24,16 @@ import java.util.logging.Logger;
  */
 public class lecturaEscrituraDisco {
 
-    public void crearArchivo() {
-        List<Disco> lista = new ArrayList<>();
-        lista.add(new Disco(1, 1, 240000, "10-08-1985", "POP-FUNK", 2010, "24K Magic"));
-        lista.add(new Disco(2, 1, 270000, "06-12-2012", "POP-FUNK", 2091, "Unorthodox Jukebox"));
-        lista.add(new Disco(3, 2, 365000, "26-05-2017", "POP LATINO-REGUETÓN-POP", 2637, "El dorado"));
-        lista.add(new Disco(4, 3, 370000, "01-10-1960", "ROCK", 1595, "G.I. Blues"));
+    public void crearArchivo(List<Disco> lista) {
         System.out.println("ENTRO CREAR DISCO");
         try {
             FileOutputStream fos = new FileOutputStream("C:\\Users\\johan\\Desktop\\Ingenieria de Sistemas\\Linea de profundizacion I\\RepositoriosCompartidos\\Discotienda\\ADisco.txt");
             try {
-                if (fos == null) {
-                    ObjectOutputStream oos = new ObjectOutputStream(fos);
-                    oos.writeObject(lista);
-                    oos.flush();
-                    oos.close();
-                    System.out.println("CREO DISCO");
-                } else {
-                    System.out.println("YA EXISTE DISCO");
-                }
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+                oos.writeObject(lista);
+                oos.flush();
+                oos.close();
+                System.out.println("CREO DISCO");
             } catch (IOException ex) {
                 Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
             }
