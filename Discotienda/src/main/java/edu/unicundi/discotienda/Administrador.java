@@ -18,12 +18,13 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -32,13 +33,19 @@ import javax.inject.Named;
  * @author johan
  */
 @Named(value = "administrador")
-@SessionScoped
+@ViewScoped 
 public class Administrador implements Serializable{
     
     private List<Artista> listaArtista;
     
+    private int id;
+    private String nombreNacimiento;
+    private String nombreArtistico;
+    private String[] genero;
+    private Date fechaNacimiento;
+    
     public Administrador(){
-        
+        System.out.println(" entro al constructor ADMIN");
     }
     
     @Inject
@@ -46,6 +53,7 @@ public class Administrador implements Serializable{
     
     @PostConstruct
     public void init() {
+        System.out.println(" entro al constructor ADMIN");
         this.listaArtista = serviceArtista.getListaArtista();
     }
     
@@ -57,9 +65,22 @@ public class Administrador implements Serializable{
         }
     }
     
-    public void crearArchivos(){
-        new lecturaEscrituraArtista().crearArchivo();
-        new lecturaEscrituraDisco().crearArchivo();
+    public void crearNuevoArtista(){
+        String generoA = "";
+        for(int i=0;i<genero.length;i++){
+            generoA = genero[i];
+        }        
+        System.out.println("lista ADMIN "+listaArtista.size());
+        listaArtista.add(new Artista(listaArtista.size(), nombreArtistico, nombreNacimiento, generoA, fechaNacimiento.toString()));
+        new lecturaEscrituraArtista().agregarArtista(listaArtista);
+    }
+    
+    public String crearArchivos(){
+        System.out.println("entro al metodo crearARCHIVOS -------- ADMIN");
+        serviceArtista.crearArtista();
+        //new lecturaEscrituraArtista().crearArchivo();
+        //new lecturaEscrituraDisco().crearArchivo();
+        return "administrador.xhtml";
     }
     
     public List<Artista> getListaArtista() {
@@ -69,4 +90,54 @@ public class Administrador implements Serializable{
     public void setListaArtista(List<Artista> listaArtista) {
         this.listaArtista = listaArtista;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombreNacimiento() {
+        return nombreNacimiento;
+    }
+
+    public void setNombreNacimiento(String nombreNacimiento) {
+        this.nombreNacimiento = nombreNacimiento;
+    }
+
+    public String getNombreArtistico() {
+        return nombreArtistico;
+    }
+
+    public void setNombreArtistico(String nombreArtistico) {
+        this.nombreArtistico = nombreArtistico;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public ServiceArtista getServiceArtista() {
+        return serviceArtista;
+    }
+
+    public void setServiceArtista(ServiceArtista serviceArtista) {
+        this.serviceArtista = serviceArtista;
+    }
+
+    public String[] getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String[] genero) {
+        this.genero = genero;
+    }
+    
+    
 }

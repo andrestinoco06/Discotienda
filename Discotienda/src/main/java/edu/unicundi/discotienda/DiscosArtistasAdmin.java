@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -24,7 +24,7 @@ import javax.inject.Named;
  * @author johan
  */
 @Named(value = "discosArtistaAdmin")
-@SessionScoped
+@ViewScoped
 public class DiscosArtistasAdmin implements Serializable {
 
     private int idArtista;

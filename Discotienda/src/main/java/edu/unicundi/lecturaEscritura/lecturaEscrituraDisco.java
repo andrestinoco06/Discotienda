@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  * @author johan
  */
 public class lecturaEscrituraDisco {
-    
+
     public void crearArchivo() {
         List<Disco> lista = new ArrayList<>();
         lista.add(new Disco(1, 1, 240000, "10-08-1985", "POP-FUNK", 2010, "24K Magic"));
@@ -32,22 +32,26 @@ public class lecturaEscrituraDisco {
         lista.add(new Disco(4, 3, 370000, "01-10-1960", "ROCK", 1595, "G.I. Blues"));
         System.out.println("ENTRO CREAR DISCO");
         try {
-            FileOutputStream fos = new FileOutputStream("C:\\Users\\johan\\Desktop\\Ingenieria de Sistemas\\Linea de profundizacion I\\RepositoriosCompartidos\\Discotienda\\ADisco.txt");            
+            FileOutputStream fos = new FileOutputStream("C:\\Users\\johan\\Desktop\\Ingenieria de Sistemas\\Linea de profundizacion I\\RepositoriosCompartidos\\Discotienda\\ADisco.txt");
             try {
-                ObjectOutputStream oos = new ObjectOutputStream(fos);          
-                oos.writeObject(lista);
-                oos.flush();
-                oos.close();
-                System.out.println("CREO ARTISTA");
+                if (fos == null) {
+                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                    oos.writeObject(lista);
+                    oos.flush();
+                    oos.close();
+                    System.out.println("CREO DISCO");
+                } else {
+                    System.out.println("YA EXISTE DISCO");
+                }
             } catch (IOException ex) {
                 Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
-            } 
+            }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public List<Disco> verDiscos(){
+
+    public List<Disco> verDiscos() {
         List<Disco> listaL = null;
         try {
             FileInputStream fis = new FileInputStream("C:\\Users\\johan\\Desktop\\Ingenieria de Sistemas\\Linea de profundizacion I\\RepositoriosCompartidos\\Discotienda\\ADisco.txt");
@@ -56,11 +60,11 @@ public class lecturaEscrituraDisco {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-                Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-                Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listaL;
     }
-    
+
 }

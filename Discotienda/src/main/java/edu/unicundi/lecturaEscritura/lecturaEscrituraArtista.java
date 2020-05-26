@@ -8,12 +8,15 @@ package edu.unicundi.lecturaEscritura;
 import com.sun.corba.se.impl.io.IIOPOutputStream;
 import edu.unicundi.discotienda.Administrador;
 import edu.unicundi.model.Artista;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStreamWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,26 +31,48 @@ import java.util.logging.Logger;
  */
 public class lecturaEscrituraArtista {
 
-    public void crearArchivo() {
-        List<Artista> lista = new ArrayList<>();
-        lista.add(new Artista(1, "Bruno Mars", "Peter Gene Hernandez", "POP-FUNK", "10-08-1985"));
-        lista.add(new Artista(2, "Shakira", "Shakira Isabel Mebarak Ripoll", "POP-ROCK EN ESPAÑOL", "02-02-1977"));
-        lista.add(new Artista(3, "Elvis Presley", "Elvis Aaron Presley", "POP-ROCK-COUNTRY", "08-01-1935"));
-        lista.add(new Artista(4, "Redimi2", "Willy González Cruz", "HIP HOP CRISTIANO-RAP-TRAP", "03-06-1979"));
+    public void crearArchivo(List<Artista> lista) {
         System.out.println("ENTRO CREAR ARTISTA");
         try {
+
             FileOutputStream fos = new FileOutputStream("C:\\Users\\johan\\Desktop\\Ingenieria de Sistemas\\Linea de profundizacion I\\RepositoriosCompartidos\\Discotienda\\AArtista.txt");
+            
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(lista);
             oos.flush();
             oos.close();
             System.out.println("CREO ARTISTA");
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+    }
+
+    public void agregarArtista(List<Artista> lista) {
+
+        //Borra el fichero
+        try {
+            File Ffichero = new File("C:\\Users\\johan\\Desktop\\Ingenieria de Sistemas\\Linea de profundizacion I\\RepositoriosCompartidos\\Discotienda\\AArtista.txt");
+            if (Ffichero.exists()) {
+                Ffichero.delete();
+                System.out.println("BORRO");
+            }
+            System.out.println("lista ESCRITURA " + lista.size());
+            //crea un nuevo fichero con la información 
+            FileOutputStream fos = new FileOutputStream("C:\\Users\\johan\\Desktop\\Ingenieria de Sistemas\\Linea de profundizacion I\\RepositoriosCompartidos\\Discotienda\\AArtista.txt");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(lista);
+            oos.flush();
+            oos.close();
+            System.out.println("CREO ARTISTA NUEVO");
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public List<Artista> verArtistas() {
@@ -56,14 +81,19 @@ public class lecturaEscrituraArtista {
         System.out.println("Entro a ver al artista");
         try {
             fis = new FileInputStream("C:\\Users\\johan\\Desktop\\Ingenieria de Sistemas\\Linea de profundizacion I\\RepositoriosCompartidos\\Discotienda\\AArtista.txt");
-            ObjectInputStream listaEntrada = new ObjectInputStream(fis);
-            listaL = (List<Artista>) listaEntrada.readObject();
+            if(fis != null){
+                System.out.println("Entro a pesar de que no existe");
+                ObjectInputStream listaEntrada = new ObjectInputStream(fis);
+                listaL = (List<Artista>) listaEntrada.readObject();
+            }else{
+                System.out.println("NO ENCONTRO ARTISTA, NO EXISTE EL ARCHIVO");
+            }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("NO ENCONTRO ARTISTA, NO EXISTE EL ARCHIVO, EXCEPCIÓN");
         }
         return listaL;
     }
