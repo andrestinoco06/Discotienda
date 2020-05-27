@@ -23,6 +23,10 @@ public class ServiceCancion {
     
     List<Cancion> listaCancion;
     
+    public ServiceCancion(){
+        
+    }
+    
     @PostConstruct
     public void init() {
         listaCancion = new lecturaEscrituraCancion().verCancion();
@@ -36,5 +40,13 @@ public class ServiceCancion {
         lista.add(new Cancion(4,3, "La Bicicleta", 227, "27/05/2016", "REGUETON-VALLENATO-", 42000));
         new lecturaEscrituraCancion().crearArchivo(lista);
     }
-    
+
+    public List<Cancion> getListaCancion() {
+        return listaCancion;
+    }
+
+    public void setListaCancion(List<Cancion> listaCancion) {
+        this.listaCancion = listaCancion;
+    }
+
 }

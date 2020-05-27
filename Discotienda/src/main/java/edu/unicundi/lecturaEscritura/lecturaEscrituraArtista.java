@@ -6,7 +6,7 @@
 package edu.unicundi.lecturaEscritura;
 
 import com.sun.corba.se.impl.io.IIOPOutputStream;
-import edu.unicundi.discotienda.Administrador;
+import edu.unicundi.discotienda.ArtistasAdministrador;
 import edu.unicundi.model.Artista;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -69,7 +69,7 @@ public class lecturaEscrituraArtista {
             oos.close();
             System.out.println("CREO ARTISTA NUEVO");
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ArtistasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -89,7 +89,7 @@ public class lecturaEscrituraArtista {
                 System.out.println("NO ENCONTRO ARTISTA, NO EXISTE EL ARCHIVO");
             }
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ArtistasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

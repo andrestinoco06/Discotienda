@@ -88,13 +88,18 @@
 
                 <p class="text-gray font-weight-bold text-uppercase px-3 small pb-4 mb-0">Menú</p>
 
-                <ul class="nav flex-column bg-white mb-0">
+                <ul class="nav flex-column bg-black mb-0" onmousedown="true">
                     
                     <li class="nav-item">
-                        <h:button class="btn btn-lg btn-block font-italic" value="Ver lista" onclick=""/>
+                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Registrar Artistas" actionListener="#{interfaceAdmin.registrarArtistas()}" style="width:100%"/>
                     </li>
+                    <li></li>
                     <li class="nav-item">
-                        <h:button class="btn btn-light btn-lg btn-block font-italic" value="Canciones"/>
+                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Buscar Discos" actionListener="#{interfaceAdmin.verDiscos()}" style="width:100%"/>
+                    </li>
+                    <li></li>
+                    <li class="nav-item">
+                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Buscar Canciones" actionListener="#{interfaceAdmin.verCanciones()}" style="width:100%"/>
                     </li>
                 </ul>
             </div>

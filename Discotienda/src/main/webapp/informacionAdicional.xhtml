@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         
-        <title>Canciones Disco </title>
+        <title>Información adicional </title>
         <h:outputStylesheet library="css" name="bootstrap.css" />
         <h:outputScript library="js" name="bootstrap.js" />
         <h:outputScript library="js" name="jquery-3.5.0.min.js" />
@@ -108,68 +108,32 @@
                     <small class="text-uppercase font-weight-bold">Menú</small>
                 </button>
 
-                <p:dataTable id="DT_cancion" value="#{cancionesDisAdmin.listaCancion}" var ="cancion" paginator="true" editable="true" >
-                    <f:facet name="header">
-                        CANCIONES
-                    </f:facet>
-                    <p:column headerText="Nombre">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{cancion.nombreCancion}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="I_nombreC" required="true" value="#{cancion.nombreCancion}" style="width:100%"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Fecha publicacion">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{cancion.fechaPublicacion}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="I_fechaP" required="true" value="#{cancion.fechaPublicacion}" style="width:100%"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Precio">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{cancion.precion}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="I_precio" required="true" value="#{cancion.precion}" style="width:100%"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Duración">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{cancion.duracionCancion}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="I_duracion" required="true" value="#{cancion.duracionCancion}" style="width:100%"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    <p:column headerText="Duración">
-                        <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{cancion.genero}" /></f:facet>
-                            <f:facet name="input"><p:inputText id="I_genero" required="true" value="#{cancion.genero}" style="width:100%"/></f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    
-                </p:dataTable>
-                <h:panelGrid id="registroCanciones" columns="3" cellpadding="3">
+                <h:panelGrid id="PgInformacionAdicional" columns="3" cellpadding="3">
 
-                    <h:outputLabel value="Nombre Cancion" for="idNombreN" />
-                    <p:inputText id="idNombreN" value="#{cancionesDisAdmin.nombreCancion}" required="true" maxlength="40" label="Nombre Nacimiento"/>
+                    <h:outputLabel value="Nombre Disco" for="idNombreN" />
+                    <p:inputText id="idNombreN" value="#{discosArAd.nombreDisco}" required="true" maxlength="40" label="Nombre Nacimiento"/>
                     <p:message for="idNombreN" />
 
                     <h:outputLabel value="Fecha de publicación" for="idFechaN" />
-                    <p:inputText id="idFechaN" type="date" value="#{cancionesDisAdmin.fechaPublicacion}" required="true" p:placeholder="DD/MM/AAAA" label="Fecha">
+                    <p:inputText id="idFechaN" type="date" value="#{discosArAd.fechaPublicacion}" required="true" p:placeholder="DD/MM/AAAA" label="Fecha">
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </p:inputText>
                     <p:message for="idFechaN" />
                     
                     <h:outputLabel value="Precio" for="idPrecioN" />
-                    <p:inputText id="idPrecioN" type="number" value="#{cancionesDisAdmin.precio}" required="true" label="Fecha">
+                    <p:inputText id="idPrecioN" type="number" value="#{discosArAd.precio}" required="true" label="Fecha">
                         
                     </p:inputText>
                     <p:message for="idPrecioN" />
                     
                     <h:outputLabel value="Duracion" for="idDuracionA" />
-                    <p:inputText id="idDuracionA" value="#{cancionesDisAdmin.duracion}" required="true" maxlength="20" label="Nombre Artístico">
+                    <p:inputText id="idDuracionA" value="#{discosArAd.duracion}" required="true" maxlength="20" label="Nombre Artístico">
                         <f:validateDoubleRange minimum="1" maximum="4000"/>
                     </p:inputText>
                     <p:message for="idDuracionA" />
 
                     <h:outputLabel value="Genero Músical" for="idGenero" />
-                    <h:selectManyCheckbox  id="idGenero" value="#{cancionesDisAdmin.genero}" class="form-control text-center my-2" required="true" label="Genero musical">
+                    <h:selectManyCheckbox  id="idGenero" value="#{discosArAd.genero}" class="form-control text-center my-2" required="true" label="Genero musical">
                         <f:selectItem itemValue="POP-" itemLabel="POP"></f:selectItem>
                         <f:selectItem itemValue="FUNK-" itemLabel="FUNK"></f:selectItem>
                         <f:selectItem itemValue="POP LATINO-" itemLabel="POP LATINO"></f:selectItem>
@@ -180,7 +144,7 @@
 
                     <p:message for="idGenero" />
                     
-                    <p:commandButton  icon="pi pi-check" value="Registrar Cancion" validateClient="true" actionListener="#{cancionesDisAdmin.crearNuevaCancion()}"/>
+                    <p:commandButton  icon="pi pi-check" value="Registrar Disco" validateClient="true" actionListener="#{discosArAd.crearNuevoDisco()}"/>
                     
                 </h:panelGrid> 
             </div>
@@ -194,5 +158,3 @@
 
     </h:body>
 </html>
-
-

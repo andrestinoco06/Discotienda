@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -34,8 +33,8 @@ import javax.inject.Named;
  * @author johan
  */
 @Named(value = "administrador")
-@SessionScoped 
-public class Administrador implements Serializable{
+@ViewScoped 
+public class ArtistasAdministrador implements Serializable{
     
     private List<Artista> listaArtista;
     
@@ -45,8 +44,7 @@ public class Administrador implements Serializable{
     private String[] genero;
     private Date fechaNacimiento;
     
-    public Administrador(){
-        System.out.println(" entro al constructor ADMIN");
+    public ArtistasAdministrador(){
     }
     
     @Inject
@@ -54,7 +52,6 @@ public class Administrador implements Serializable{
     
     @PostConstruct
     public void init() {
-        System.out.println(" entro al constructor ADMIN");
         this.listaArtista = serviceArtista.getListaArtista();
     }
     
@@ -63,21 +60,19 @@ public class Administrador implements Serializable{
             id = artista.getId();
             FacesContext.getCurrentInstance().getExternalContext().redirect("discosArtistasAdmin.xhtml?artista="+artista.getId());
         } catch (IOException ex) {
-            Logger.getLogger(Administrador.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ArtistasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     public void crearNuevoArtista(){
         String generoA = "";
         for(int i=0;i<genero.length;i++){
-            generoA = genero[i];
+            generoA = generoA+genero[i];
         }        
-        System.out.println("lista ADMIN "+listaArtista.size());
-        listaArtista.add(new Artista(listaArtista.size(), nombreArtistico, nombreNacimiento, generoA, fechaNacimiento.toString()));
+        String fecha = fechaNacimiento.getDay() + "-" + fechaNacimiento.getMonth() + "-" + fechaNacimiento.getYear();
+        listaArtista.add(new Artista(listaArtista.size()+1, nombreArtistico, nombreNacimiento, generoA, fecha));
         new lecturaEscrituraArtista().agregarArtista(listaArtista);
     }
-    
-    
     
     public List<Artista> getListaArtista() {
         return listaArtista;

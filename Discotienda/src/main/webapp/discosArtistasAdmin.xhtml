@@ -90,10 +90,15 @@
 
                 <ul class="nav flex-column bg-white mb-0">
                     <li class="nav-item">
-                        <h:button class="btn btn-lg btn-block font-italic" value="Ver lista" onclick=""/>
+                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Registrar Artistas" actionListener="#{interfaceAdmin.registrarArtistas()}" style="width:100%"/>
                     </li>
+                    <li></li>
                     <li class="nav-item">
-                        <h:button class="btn btn-light btn-lg btn-block font-italic" value="Canciones"/>
+                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Buscar Discos" actionListener="#{interfaceAdmin.verDiscos()}" style="width:100%"/>
+                    </li>
+                    <li></li>
+                    <li class="nav-item">
+                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Buscar Canciones" actionListener="#{interfaceAdmin.verCanciones()}" style="width:100%"/>
                     </li>
                 </ul>
             </div>
@@ -119,6 +124,12 @@
                             <f:facet name="input"><p:inputText id="I_fechaP" required="true" value="#{discos.fechaPublicacion}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
+                    <p:column headerText="Genero">
+                        <p:cellEditor>
+                            <f:facet name="output"><h:outputText value="#{discos.genero}" /></f:facet>
+                            <f:facet name="input"><p:inputText id="I_genero" required="true" value="#{discos.genero}" style="width:100%"/></f:facet>
+                        </p:cellEditor>
+                    </p:column>
                     <p:column headerText="Precio">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{discos.precio}" /></f:facet>
@@ -131,8 +142,49 @@
                             <f:facet name="input"><p:inputText id="I_duracion" required="true" value="#{discos.duracion}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
+                    <p:column headerText="Ver canciones..">
+                        <h:commandButton value="Ver canciones..." actionListener="#{discosArAd.verCancionesDiscos(discos)}"/>
+                    </p:column>
                 </p:dataTable>
+                <h:panelGrid id="registroDiscos" columns="3" cellpadding="3">
 
+                    <h:outputLabel value="Nombre Disco" for="idNombreN" />
+                    <p:inputText id="idNombreN" value="#{discosArAd.nombreDisco}" required="true" maxlength="40" label="Nombre Nacimiento"/>
+                    <p:message for="idNombreN" />
+
+                    <h:outputLabel value="Fecha de publicación" for="idFechaN" />
+                    <p:inputText id="idFechaN" type="date" value="#{discosArAd.fechaPublicacion}" required="true" p:placeholder="DD/MM/AAAA" label="Fecha">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </p:inputText>
+                    <p:message for="idFechaN" />
+                    
+                    <h:outputLabel value="Precio" for="idPrecioN" />
+                    <p:inputText id="idPrecioN" type="number" value="#{discosArAd.precio}" required="true" label="Fecha">
+                        
+                    </p:inputText>
+                    <p:message for="idPrecioN" />
+                    
+                    <h:outputLabel value="Duracion" for="idDuracionA" />
+                    <p:inputText id="idDuracionA" value="#{discosArAd.duracion}" required="true" maxlength="20" label="Nombre Artístico">
+                        <f:validateDoubleRange minimum="1" maximum="4000"/>
+                    </p:inputText>
+                    <p:message for="idDuracionA" />
+
+                    <h:outputLabel value="Genero Músical" for="idGenero" />
+                    <h:selectManyCheckbox  id="idGenero" value="#{discosArAd.genero}" class="form-control text-center my-2" required="true" label="Genero musical">
+                        <f:selectItem itemValue="POP-" itemLabel="POP"></f:selectItem>
+                        <f:selectItem itemValue="FUNK-" itemLabel="FUNK"></f:selectItem>
+                        <f:selectItem itemValue="POP LATINO-" itemLabel="POP LATINO"></f:selectItem>
+                        <f:selectItem itemValue="REGUETÓN-" itemLabel="REGUETÓN"></f:selectItem>
+                        <f:selectItem itemValue="ROCK-" itemLabel="ROCK"></f:selectItem>
+                        <f:selectItem itemValue="HIP HOP CRISTIANO-" itemLabel="HIP HOP CRISTIANO"></f:selectItem>
+                    </h:selectManyCheckbox>
+
+                    <p:message for="idGenero" />
+                    
+                    <p:commandButton  icon="pi pi-check" value="Registrar Disco" validateClient="true" actionListener="#{discosArAd.crearNuevoDisco()}"/>
+                    
+                </h:panelGrid> 
             </div>
 
         </h:form>
@@ -144,4 +196,3 @@
 
     </h:body>
 </html>
-

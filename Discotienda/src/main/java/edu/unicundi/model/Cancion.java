@@ -16,16 +16,16 @@ public class Cancion implements Serializable {
     
     private int id;
     private int idDisco;
-    private String nombreDisco;
+    private String nombreCancion;
     private int duracionCancion;
     private String fechaPublicacion;
     private String genero;
     private long precio;
 
-    public Cancion(int id, int idDisco, String nombreDisco, int duracionCancion, String fechaPublicacion, String genero, long precio) {
+    public Cancion(int id, int idDisco, String nombreCancion, int duracionCancion, String fechaPublicacion, String genero, long precio) {
         this.id = id;
         this.idDisco = idDisco;
-        this.nombreDisco = nombreDisco;
+        this.nombreCancion = nombreCancion;
         this.duracionCancion = duracionCancion;
         this.fechaPublicacion = fechaPublicacion;
         this.genero = genero;
@@ -56,12 +56,12 @@ public class Cancion implements Serializable {
         this.idDisco = idDisco;
     }
 
-    public String getNombreDisco() {
-        return nombreDisco;
+    public String getNombreCancion() {
+        return nombreCancion;
     }
 
-    public void setNombreDisco(String nombreDisco) {
-        this.nombreDisco = nombreDisco;
+    public void setNombreCancion(String nombreCancion) {
+        this.nombreCancion = nombreCancion;
     }
 
     public int getDuracionCancion() {

@@ -5,13 +5,18 @@
  */
 package edu.unicundi.discotienda;
 
+import edu.unicundi.lecturaEscritura.lecturaEscrituraDisco;
 import edu.unicundi.logic.ServiceArtista;
 import edu.unicundi.logic.ServiceDisco;
 import edu.unicundi.model.Disco;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -28,7 +33,12 @@ import javax.inject.Named;
 public class DiscosArtistasAdmin implements Serializable {
 
     private int idArtista;
-
+    private String nombreDisco;
+    private Date fechaPublicacion;
+    private long precio;
+    private int duracion;
+    private String[] genero;
+    
     private List<Disco> listaDiscos;
 
     public DiscosArtistasAdmin() {
@@ -43,6 +53,14 @@ public class DiscosArtistasAdmin implements Serializable {
         cargarDiscos();
     }
 
+    public void verCancionesDiscos(Disco discos){
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("cancionesDiscoAdmin.xhtml?disco="+discos.getId());
+        } catch (IOException ex) {
+            Logger.getLogger(ArtistasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void cargarDiscos() {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
@@ -57,9 +75,25 @@ public class DiscosArtistasAdmin implements Serializable {
                 listaBusqueda.add(listaDiscos.get(i));
             }
         }
-        
         listaDiscos = listaBusqueda;
     }
+    
+    public void crearNuevoDisco(){
+        List<Disco> totalDiscos = new ArrayList<>();
+        totalDiscos = serviceDisco.getListaDiscos();
+        System.out.println(" antes de añadir "+totalDiscos.size());
+        String generoA = "";
+        for(int i=0;i<genero.length;i++){
+            generoA = generoA+genero[i];
+        }        
+        
+        String fecha = fechaPublicacion.getDay() + "-" + fechaPublicacion.getMonth() + "-" + fechaPublicacion.getYear();
+        totalDiscos.add(new Disco(totalDiscos.size()+1,idArtista,precio,fecha,generoA,duracion,nombreDisco));
+        System.out.println(" despues de añadir "+totalDiscos.size());
+        new lecturaEscrituraDisco().agregarDisco(totalDiscos);
+        listaDiscos = totalDiscos;
+    }
+    
 
     public List<Disco> getListaDiscos() {
         return listaDiscos;
@@ -75,6 +109,46 @@ public class DiscosArtistasAdmin implements Serializable {
 
     public void setIdArtista(int idArtista) {
         this.idArtista = idArtista;
+    }
+
+    public String getNombreDisco() {
+        return nombreDisco;
+    }
+
+    public void setNombreDisco(String nombreDisco) {
+        this.nombreDisco = nombreDisco;
+    }
+
+    public Date getFechaPublicacion() {
+        return fechaPublicacion;
+    }
+
+    public void setFechaPublicacion(Date fechaPublicacion) {
+        this.fechaPublicacion = fechaPublicacion;
+    }
+
+    public long getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(long precio) {
+        this.precio = precio;
+    }
+
+    public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
+    }
+
+    public String[] getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String[] genero) {
+        this.genero = genero;
     }
 
     
