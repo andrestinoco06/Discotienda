@@ -9,6 +9,7 @@ import edu.unicundi.lecturaEscritura.lecturaEscrituraArtista;
 import edu.unicundi.lecturaEscritura.lecturaEscrituraDisco;
 import edu.unicundi.logic.ServiceArtista;
 import edu.unicundi.logic.ServiceDisco;
+import edu.unicundi.logic.ServiceUsuario;
 import edu.unicundi.model.Artista;
 import edu.unicundi.model.Disco;
 import java.io.FileInputStream;
@@ -50,15 +51,22 @@ public class ArtistasAdministrador implements Serializable{
     @Inject
     private ServiceArtista serviceArtista;
     
+    @Inject
+    private ServiceUsuario serviceUsuario;
+    
     @PostConstruct
     public void init() {
-        this.listaArtista = serviceArtista.getListaArtista();
+        if(serviceUsuario.validacionUsuario()){
+            this.listaArtista = serviceArtista.getListaArtista();
+        }
     }
     
     public void verDiscosArtista(Artista artista){
         try {
             id = artista.getId();
-            FacesContext.getCurrentInstance().getExternalContext().redirect("discosArtistasAdmin.xhtml?artista="+artista.getId());
+            //FacesContext.getCurrentInstance().getExternalContext().redirect("discosArtistasAdmin.xhtml?artista="+artista.getId());
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("idArtista", artista.getId());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("discosArtistasAdmin.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(ArtistasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
         }

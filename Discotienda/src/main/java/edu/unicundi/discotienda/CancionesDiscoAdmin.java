@@ -10,11 +10,14 @@ import edu.unicundi.lecturaEscritura.lecturaEscrituraDisco;
 import edu.unicundi.logic.ServiceCancion;
 import edu.unicundi.model.Cancion;
 import edu.unicundi.model.Disco;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -27,63 +30,64 @@ import javax.inject.Named;
  * @author johan
  */
 @Named(value = "cancionesDisAdmin")
-@ViewScoped 
-public class CancionesDiscoAdmin implements Serializable{
-    
+@ViewScoped
+public class CancionesDiscoAdmin implements Serializable {
+
     private List<Cancion> listaCancion;
     private int idDisco;
-    
+
     private String nombreCancion;
     private int duracion;
     private String[] genero;
     private Date fechaPublicacion;
     private int precio;
-    
-    public CancionesDiscoAdmin (){
-        
+
+    public CancionesDiscoAdmin() {
+
     }
-    
+
     @Inject
     private ServiceCancion serviceCancion;
-    
+
     @PostConstruct
     public void init() {
         cargarCanciones();
     }
 
     public void cargarCanciones() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        ExternalContext externalContext = facesContext.getExternalContext();
-        Map params = externalContext.getRequestParameterMap();
-        List<Cancion> listaBusqueda = new ArrayList<>();
-        idDisco = new Integer((String) params.get("disco"));
-        this.listaCancion = serviceCancion.getListaCancion();
-        
-        for (int i = 0; i < listaCancion.size(); i++) {
-            if (listaCancion.get(i).getIdDisco()== idDisco) {
-                listaBusqueda.add(listaCancion.get(i));
+        if (!FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idDisco").equals(null)) {
+            List<Cancion> listaBusqueda = new ArrayList<>();
+            idDisco = (int) (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idDisco"));
+            this.listaCancion = serviceCancion.getListaCancion();
+            for (int i = 0; i < listaCancion.size(); i++) {
+                if (listaCancion.get(i).getIdDisco() == idDisco) {
+                    listaBusqueda.add(listaCancion.get(i));
+                }
+            }
+            listaCancion = listaBusqueda;
+        } else {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("artistasAdministrador.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(DiscosArtistasAdmin.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        listaCancion = listaBusqueda;
     }
-    
-    public void crearNuevaCancion(){
+
+    public void crearNuevaCancion() {
         List<Cancion> totalCanciones = new ArrayList<>();
         totalCanciones = serviceCancion.getListaCancion();
-        System.out.println(" antes de añadir "+totalCanciones.size());
         String generoA = "";
-        for(int i=0;i<genero.length;i++){
-            generoA = generoA+genero[i];
-        }        
-        
+        for (int i = 0; i < genero.length; i++) {
+            generoA = generoA + genero[i];
+        }
         //String fecha = fechaPublicacion.getDay() + "-" + fechaPublicacion.getMonth() + "-" + fechaPublicacion.getYear();
         String fecha = fechaPublicacion.toString();
-        totalCanciones.add(new Cancion(totalCanciones.size()+1, idDisco, nombreCancion, duracion, fecha , generoA, precio));
-        System.out.println(" despues de añadir "+totalCanciones.size());
+        totalCanciones.add(new Cancion(totalCanciones.size() + 1, idDisco, nombreCancion, duracion, fecha, generoA, precio));
         new lecturaEscrituraCancion().agregarCancion(listaCancion);
         listaCancion = totalCanciones;
     }
-    
+
     public List<Cancion> getListaCancion() {
         return listaCancion;
     }
@@ -131,9 +135,5 @@ public class CancionesDiscoAdmin implements Serializable{
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-    
-    
-    
-    
-    
+
 }

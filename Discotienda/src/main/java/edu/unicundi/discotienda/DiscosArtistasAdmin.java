@@ -38,7 +38,7 @@ public class DiscosArtistasAdmin implements Serializable {
     private long precio;
     private int duracion;
     private String[] genero;
-    
+
     private List<Disco> listaDiscos;
 
     public DiscosArtistasAdmin() {
@@ -53,48 +53,50 @@ public class DiscosArtistasAdmin implements Serializable {
         cargarDiscos();
     }
 
-    public void verCancionesDiscos(Disco discos){
+    public void verCancionesDiscos(Disco discos) {
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("cancionesDiscoAdmin.xhtml?disco="+discos.getId());
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("idDisco", discos.getId());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("cancionesDiscoAdmin.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(ArtistasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void cargarDiscos() {
-        FacesContext facesContext = FacesContext.getCurrentInstance();
-        ExternalContext externalContext = facesContext.getExternalContext();
-        Map params = externalContext.getRequestParameterMap();
-        idArtista = new Integer((String) params.get("artista"));
-        
-        System.out.println(" -  - -- - - " + idArtista);
-        this.listaDiscos = serviceDisco.getListaDiscos();
-        List<Disco> listaBusqueda = new ArrayList<>();
-        
-        for (int i = 0; i < listaDiscos.size(); i++) {
-            if (listaDiscos.get(i).getIdArtista() == idArtista) {
-                listaBusqueda.add(listaDiscos.get(i));
+        if (!FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idArtista").equals(null)) {
+            idArtista = (int) (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idArtista"));
+            System.out.println(" -  - -- - - " + idArtista);
+            this.listaDiscos = serviceDisco.getListaDiscos();
+            List<Disco> listaBusqueda = new ArrayList<>();
+            for (int i = 0; i < listaDiscos.size(); i++) {
+                if (listaDiscos.get(i).getIdArtista() == idArtista) {
+                    listaBusqueda.add(listaDiscos.get(i));
+                }
+            }
+            listaDiscos = listaBusqueda;
+        } else {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("artistasAdministrador.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(DiscosArtistasAdmin.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        listaDiscos = listaBusqueda;
-        
     }
-    
-    public void crearNuevoDisco(){
+
+    public void crearNuevoDisco() {
         List<Disco> totalDiscos = new ArrayList<>();
         totalDiscos = serviceDisco.getListaDiscos();
-        System.out.println(" antes de añadir "+totalDiscos.size());
+        System.out.println(" antes de añadir " + totalDiscos.size());
         String generoA = "";
-        for(int i=0;i<genero.length;i++){
-            generoA = generoA+genero[i];
-        }        
-        
+        for (int i = 0; i < genero.length; i++) {
+            generoA = generoA + genero[i];
+        }
+
         String fecha = fechaPublicacion.getDay() + "-" + fechaPublicacion.getMonth() + "-" + fechaPublicacion.getYear();
-        totalDiscos.add(new Disco(totalDiscos.size()+1,idArtista,precio,fecha,generoA,duracion,nombreDisco));
+        totalDiscos.add(new Disco(totalDiscos.size() + 1, idArtista, precio, fecha, generoA, duracion, nombreDisco));
         new lecturaEscrituraDisco().agregarDisco(totalDiscos);
         cargarDiscos();
     }
-    
 
     public List<Disco> getListaDiscos() {
         return listaDiscos;
@@ -152,6 +154,4 @@ public class DiscosArtistasAdmin implements Serializable {
         this.genero = genero;
     }
 
-    
-    
 }

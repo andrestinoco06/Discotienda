@@ -1,20 +1,21 @@
 package edu.unicundi.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Camilo Tinoco
  * @author Johan Zambrano
  * @version 1.0.0
  */
-public class UsuarioModel {
+public class UsuarioModel implements Serializable{
     
-    private String nombre, apellido, correo, direccion, documento, contrasena;
+    private String nombre, apellido, correo, direccion, documento, contrasena, telefono;
     
-    private int edad, idRol;
-    
-    private long telefono;
-    
-    public UsuarioModel(String nombre, String apellido, String correo, String direccion, String documento, String contrasena, int edad, int idRol, long telefono){
+    private int id, edad, idRol;
+
+    public UsuarioModel(int id, String nombre, String apellido, String correo, String direccion, String documento, String contrasena, int edad, int idRol, String telefono){
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
@@ -24,6 +25,14 @@ public class UsuarioModel {
         this.edad = edad;
         this.idRol = idRol;
         this.telefono = telefono;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -90,11 +99,11 @@ public class UsuarioModel {
         this.idRol = idRol;
     }
 
-    public long getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(long telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
     

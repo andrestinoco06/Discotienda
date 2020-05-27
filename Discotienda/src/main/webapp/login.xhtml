@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
 
-        <title>Iniciar sesión</title>
+        <title>#{login.titulo}</title>
         <h:outputStylesheet library="css" name="bootstrap.css" />
         <h:outputScript library="js" name="bootstrap.js" />
         <h:outputScript library="js" name="jquery-3.5.0.min.js" />
@@ -26,10 +26,10 @@
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Documento de identidad</h5>
-                                <h:inputText class="form-control text-center"></h:inputText>
+                                <h:inputText class="form-control text-center"  required="true" value="#{login.usuario}"></h:inputText>
                                 <h5 class="card-title">Contraseña</h5>
-                                <h:inputText class="form-control text-center"></h:inputText>
-                                <p:commandButton class="mt-4 btn btn-info" value="Iniciar sesión" icon="pi pi-home"></p:commandButton>
+                                <h:inputText class="form-control text-center" required="true" value="#{login.clave}"></h:inputText>
+                                <p:commandButton class="mt-4 btn btn-info" value="Iniciar sesión" validateClient="true" icon="pi pi-home" actionListener="#{login.iniciarSesion()}"></p:commandButton>
                             </div>
                             <div class="card-footer text-muted">&copy;
                                 2020
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <h:panelGrid id="registroArtistas" columns="3" cellpadding="3">
-                <p:commandButton  icon="pi pi-check" value="Crear archivos artistas" validateClient="true" actionListener="#{login.crearArchivos()}"/>
+                <p:commandButton  icon="pi pi-check" value="Crear archivos" validateClient="true" actionListener="#{login.crearArchivos()}"/>
             </h:panelGrid>
         </h:form>
     </h:body>

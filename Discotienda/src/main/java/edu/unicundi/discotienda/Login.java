@@ -8,8 +8,16 @@ package edu.unicundi.discotienda;
 import edu.unicundi.logic.ServiceArtista;
 import edu.unicundi.logic.ServiceDisco;
 import edu.unicundi.logic.ServiceCancion;
+import edu.unicundi.logic.ServiceUsuario;
+import edu.unicundi.model.UsuarioModel;
+import java.io.IOException;
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,8 +27,16 @@ import javax.inject.Named;
  * @author johan
  */
 @Named(value = "login")
-@SessionScoped 
+@RequestScoped 
 public class Login implements Serializable{
+    
+    private String usuario, clave, titulo;
+    
+    @PostConstruct
+    public void init() {
+        System.out.println("entro al post del login");
+        this.titulo = "Iniciar Sesión";
+    }
     
     @Inject
     private ServiceArtista serviceArtista;
@@ -28,6 +44,28 @@ public class Login implements Serializable{
     private ServiceDisco serviceDisco;
     @Inject
     private ServiceCancion serviceCancion;
+    @Inject
+    private ServiceUsuario serviceUsuario;
+    
+    public void iniciarSesion(){
+        List<UsuarioModel> listaUsuario = serviceUsuario.getListaUsuario();
+        for(int i=0;i<listaUsuario.size();i++){
+            if(listaUsuario.get(i).getDocumento().equals(usuario)){
+                if(listaUsuario.get(i).getContrasena().equals(clave)){
+                    if(listaUsuario.get(i).getIdRol() == 1){
+                        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("sessionAdministrador", true);
+                        try {
+                            FacesContext.getCurrentInstance().getExternalContext().redirect("faces/artistasAdministrador.xhtml");
+                        } catch (IOException ex) {
+                            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }else{
+                        
+                    }
+                }
+            }
+        }
+    }
     
     public void crearArchivos(){
         System.out.println("entro al metodo crearARCHIVOS -------- login");
@@ -36,6 +74,33 @@ public class Login implements Serializable{
         serviceDisco.crearArchicoDisco();
         System.out.println("entro al metodo crearARCHIVOS -------- login3");
         serviceCancion.crearArchicoCancion();
+        System.out.println("entro al metodo crearARCHIVOS -------- login4");
+        serviceUsuario.crearUsuario();
+        
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
     }
     
 }
