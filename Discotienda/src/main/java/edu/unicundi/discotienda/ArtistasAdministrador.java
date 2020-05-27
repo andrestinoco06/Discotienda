@@ -56,9 +56,7 @@ public class ArtistasAdministrador implements Serializable{
     
     @PostConstruct
     public void init() {
-        if(serviceUsuario.validacionUsuario()){
-            this.listaArtista = serviceArtista.getListaArtista();
-        }
+        this.listaArtista = serviceArtista.getListaArtista();
     }
     
     public void verDiscosArtista(Artista artista){

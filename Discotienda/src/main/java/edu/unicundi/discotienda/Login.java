@@ -54,6 +54,7 @@ public class Login implements Serializable{
                 if(listaUsuario.get(i).getContrasena().equals(clave)){
                     if(listaUsuario.get(i).getIdRol() == 1){
                         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("sessionAdministrador", true);
+                        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("idSessionAdministrador", listaUsuario.get(i).getId());
                         try {
                             FacesContext.getCurrentInstance().getExternalContext().redirect("faces/artistasAdministrador.xhtml");
                         } catch (IOException ex) {
