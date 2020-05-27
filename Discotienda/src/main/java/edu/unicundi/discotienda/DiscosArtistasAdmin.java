@@ -66,6 +66,7 @@ public class DiscosArtistasAdmin implements Serializable {
         ExternalContext externalContext = facesContext.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
         idArtista = new Integer((String) params.get("artista"));
+        
         System.out.println(" -  - -- - - " + idArtista);
         this.listaDiscos = serviceDisco.getListaDiscos();
         List<Disco> listaBusqueda = new ArrayList<>();
@@ -76,6 +77,7 @@ public class DiscosArtistasAdmin implements Serializable {
             }
         }
         listaDiscos = listaBusqueda;
+        
     }
     
     public void crearNuevoDisco(){
@@ -89,9 +91,8 @@ public class DiscosArtistasAdmin implements Serializable {
         
         String fecha = fechaPublicacion.getDay() + "-" + fechaPublicacion.getMonth() + "-" + fechaPublicacion.getYear();
         totalDiscos.add(new Disco(totalDiscos.size()+1,idArtista,precio,fecha,generoA,duracion,nombreDisco));
-        System.out.println(" despues de añadir "+totalDiscos.size());
         new lecturaEscrituraDisco().agregarDisco(totalDiscos);
-        listaDiscos = totalDiscos;
+        cargarDiscos();
     }
     
 

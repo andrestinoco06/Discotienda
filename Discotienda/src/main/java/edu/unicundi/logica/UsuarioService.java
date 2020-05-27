@@ -1,4 +1,4 @@
-package edu.unicundi.logica;
+/*package edu.unicundi.logica;
 
 import edu.unicundi.discotienda.Usuario;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import javax.inject.Named;
  * @author Camilo Tinoco
  * @author Johan Zambrano
  * @version 1.0.0
- */
+ 
 @Named (value = "usuarioService")
 @RequestScoped
 public class UsuarioService {
@@ -41,3 +41,4 @@ public class UsuarioService {
     }
     
 }
+*/
