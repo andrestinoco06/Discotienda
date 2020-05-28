@@ -17,12 +17,12 @@ public class Disco implements Serializable{
     private int id;
     private int idArtista;
     private long precio;
-    private String fechaPublicacion;
+    private Date fechaPublicacion;
     private String genero;
     private long duracion;
     private String nombreDisco;
 
-    public Disco(int id, int idArtista, long precio, String fechaPublicacion, String genero, long duracion, String nombreDisco) {
+    public Disco(int id, int idArtista, long precio, Date fechaPublicacion, String genero, long duracion, String nombreDisco) {
         this.id = id;
         this.idArtista = idArtista;
         this.precio = precio;
@@ -64,11 +64,11 @@ public class Disco implements Serializable{
         this.precio = precio;
     }
 
-    public String getFechaPublicacion() {
+    public Date getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(String fechaPublicacion) {
+    public void setFechaPublicacion(Date fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 

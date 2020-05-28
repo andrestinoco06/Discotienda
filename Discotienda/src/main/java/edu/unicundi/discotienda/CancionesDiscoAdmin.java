@@ -83,7 +83,7 @@ public class CancionesDiscoAdmin implements Serializable {
         }
         //String fecha = fechaPublicacion.getDay() + "-" + fechaPublicacion.getMonth() + "-" + fechaPublicacion.getYear();
         String fecha = fechaPublicacion.toString();
-        totalCanciones.add(new Cancion(totalCanciones.size() + 1, idDisco, nombreCancion, duracion, fecha, generoA, precio));
+        totalCanciones.add(new Cancion(totalCanciones.size() + 1, idDisco, nombreCancion, duracion, fechaPublicacion, generoA, precio));
         new lecturaEscrituraCancion().agregarCancion(listaCancion);
         listaCancion = totalCanciones;
     }

@@ -7,7 +7,10 @@ package edu.unicundi.logic;
 
 import edu.unicundi.lecturaEscritura.lecturaEscrituraCancion;
 import edu.unicundi.model.Cancion;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -32,12 +35,15 @@ public class ServiceCancion {
         listaCancion = new lecturaEscrituraCancion().verCancion();
     }
     
-    public void crearArchicoCancion(){
+    public void crearArchicoCancion() throws ParseException{
         List<Cancion> lista = new ArrayList<>();
-        lista.add(new Cancion(1,1, "24K Magic", 226,"06/10/2016","FUNK-", 40000));
-        lista.add(new Cancion(2,1, "That's What I Like", 206,"30/01/2017","FUNK-", 40000));
-        lista.add(new Cancion(3,1, "Versace on the Floor", 261, "12/06/2017","POP-", 40000));
-        lista.add(new Cancion(4,3, "La Bicicleta", 227, "27/05/2016", "REGUETON-VALLENATO-", 42000));
+        SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy"); 
+        Date dt_1 = objSDF.parse("20-08-1981"); 
+        Date dt_2 = objSDF.parse("12-10-2012");
+        lista.add(new Cancion(1,1, "24K Magic", 226,dt_1,"FUNK-", 40000));
+        lista.add(new Cancion(2,1, "That's What I Like", 206,dt_1,"FUNK-", 40000));
+        lista.add(new Cancion(3,1, "Versace on the Floor", 261, dt_1,"POP-", 40000));
+        lista.add(new Cancion(4,3, "La Bicicleta", 227, dt_2, "REGUETON-VALLENATO-", 42000));
         new lecturaEscrituraCancion().crearArchivo(lista);
     }
 

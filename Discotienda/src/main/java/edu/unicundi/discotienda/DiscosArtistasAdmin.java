@@ -84,6 +84,7 @@ public class DiscosArtistasAdmin implements Serializable {
     }
 
     public void crearNuevoDisco() {
+        System.out.println(" antes de añadir ");
         List<Disco> totalDiscos = new ArrayList<>();
         totalDiscos = serviceDisco.getListaDiscos();
         System.out.println(" antes de añadir " + totalDiscos.size());
@@ -92,8 +93,8 @@ public class DiscosArtistasAdmin implements Serializable {
             generoA = generoA + genero[i];
         }
 
-        String fecha = fechaPublicacion.getDay() + "-" + fechaPublicacion.getMonth() + "-" + fechaPublicacion.getYear();
-        totalDiscos.add(new Disco(totalDiscos.size() + 1, idArtista, precio, fecha, generoA, duracion, nombreDisco));
+        
+        totalDiscos.add(new Disco(totalDiscos.size() + 1, idArtista, precio, fechaPublicacion, generoA, duracion, nombreDisco));
         new lecturaEscrituraDisco().agregarDisco(totalDiscos);
         cargarDiscos();
     }

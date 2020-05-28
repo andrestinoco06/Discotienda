@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         
         <title>Discos Artistas </title>
@@ -123,7 +124,11 @@
                     </p:column>
                     <p:column headerText="Fecha publicacion" filterBy="#{discos.fechaPublicacion}" filterMatchMode="contains">
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{discos.fechaPublicacion}" /></f:facet>
+                            <f:facet name="output">
+                                <h:outputText value="#{discos.fechaPublicacion}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText> 
+                            </f:facet>
                             <f:facet name="input"><p:inputText id="I_fechaP" required="true" value="#{discos.fechaPublicacion}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
@@ -156,7 +161,7 @@
                     <p:message for="idNombreN" />
 
                     <h:outputLabel value="Fecha de publicación" for="idFechaN" />
-                    <p:inputText id="idFechaN" type="date" value="#{discosArAd.fechaPublicacion}" required="true" p:placeholder="DD/MM/AAAA" label="Fecha">
+                    <p:inputText id="idFechaN" value="#{discosArAd.fechaPublicacion}" a:placeholder="DD/MM/AAAA" required="true" p:placeholder="DD/MM/AAAA" label="Fecha">
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </p:inputText>
                     <p:message for="idFechaN" />
@@ -185,7 +190,7 @@
 
                     <p:message for="idGenero" />
                     
-                    <p:commandButton  icon="pi pi-check" value="Registrar Disco" validateClient="true" actionListener="#{discosArAd.crearNuevoDisco()}"/>
+                    <h:commandButton value="Registrar Disco" actionListener="#{discosArAd.crearNuevoDisco()}"/>
                     
                 </h:panelGrid> 
             </div>

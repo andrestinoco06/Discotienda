@@ -18,11 +18,11 @@ public class Cancion implements Serializable {
     private int idDisco;
     private String nombreCancion;
     private int duracionCancion;
-    private String fechaPublicacion;
+    private Date fechaPublicacion;
     private String genero;
     private long precio;
 
-    public Cancion(int id, int idDisco, String nombreCancion, int duracionCancion, String fechaPublicacion, String genero, long precio) {
+    public Cancion(int id, int idDisco, String nombreCancion, int duracionCancion, Date fechaPublicacion, String genero, long precio) {
         this.id = id;
         this.idDisco = idDisco;
         this.nombreCancion = nombreCancion;
@@ -72,11 +72,11 @@ public class Cancion implements Serializable {
         this.duracionCancion = duracionCancion;
     }
 
-    public String getFechaPublicacion() {
+    public Date getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(String fechaPublicacion) {
+    public void setFechaPublicacion(Date fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
