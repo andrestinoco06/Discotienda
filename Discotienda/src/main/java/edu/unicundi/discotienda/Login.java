@@ -6,12 +6,14 @@
 package edu.unicundi.discotienda;
 
 import edu.unicundi.logic.ServiceArtista;
+import edu.unicundi.logic.ServiceBusquedaCompra;
 import edu.unicundi.logic.ServiceDisco;
 import edu.unicundi.logic.ServiceCancion;
 import edu.unicundi.logic.ServiceUsuario;
 import edu.unicundi.model.UsuarioModel;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,6 +48,8 @@ public class Login implements Serializable{
     private ServiceCancion serviceCancion;
     @Inject
     private ServiceUsuario serviceUsuario;
+    @Inject
+    private ServiceBusquedaCompra serviceBusquedaCompra;
     
     public void iniciarSesion(){
         List<UsuarioModel> listaUsuario = serviceUsuario.getListaUsuario();
@@ -61,7 +65,13 @@ public class Login implements Serializable{
                             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }else{
-                        
+                        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("sessionCliente", true);
+                        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("idSessionCliente", listaUsuario.get(i).getId());
+                        try {
+                            FacesContext.getCurrentInstance().getExternalContext().redirect("faces/bienvenidaCliente.xhtml");
+                        } catch (IOException ex) {
+                            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             }
@@ -70,14 +80,19 @@ public class Login implements Serializable{
     
     public void crearArchivos(){
         System.out.println("entro al metodo crearARCHIVOS -------- login");
-        serviceArtista.crearArtista();
+        try {
+            serviceArtista.crearArtista();
+        } catch (ParseException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("entro al metodo crearARCHIVOS -------- login2");
         serviceDisco.crearArchicoDisco();
         System.out.println("entro al metodo crearARCHIVOS -------- login3");
         serviceCancion.crearArchicoCancion();
         System.out.println("entro al metodo crearARCHIVOS -------- login4");
         serviceUsuario.crearUsuario();
-        
+        System.out.println("entro al metodo crearARCHIVOS -------- login5");
+        serviceBusquedaCompra.crearArchivoCarro();
     }
 
     public String getTitulo() {

@@ -52,6 +52,19 @@ public class ServiceUsuario {
         }        
     }
     
+    public boolean validacionCliente(){
+        if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionCliente").equals(true)){
+            return true;
+        }else{
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("faces/login.xhtml");
+            } catch (IOException ex) {
+                Logger.getLogger(ServiceUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return false;
+        }        
+    }
+    
     public void crearUsuario(){
         List<UsuarioModel> lista = new ArrayList<>();
         System.out.println(" entro al METODO CREAR ARTISTA ");
@@ -59,6 +72,7 @@ public class ServiceUsuario {
         lista.add(new UsuarioModel(2, "Johan", "Zambrano", "prueba@hotmail.com", "cll falsa", "10192911", "clave", 22, 1, "3046818117"));
         lista.add(new UsuarioModel(3, "Johan", "Zambrano", "prueba@hotmail.com", "cll falsa", "10192911", "clave", 22, 1, "3046818117"));
         lista.add(new UsuarioModel(4, "Johan", "Zambrano", "prueba@hotmail.com", "cll falsa", "10192911", "clave", 22, 1, "3046818117"));
+        lista.add(new UsuarioModel(5, "Sebastián", "Páez", "prueba@hotmail.com", "cll falsa", "1111", "clave", 22, 2, "3046818117"));
         try {
             new lecturaEscrituraUsuario().crearArchivo(lista);
         } catch (IOException ex) {
