@@ -51,11 +51,14 @@ public class InterfaceAdmin implements Serializable {
     public void cerrarSessionAdmin() {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("sessionAdministrador", false);
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("idSessionAdministrador", null);
+        
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("faces/login.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(InterfaceAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
     }
 
     public void registrarArtistas() {

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
 
         <title>Administrador</title>
@@ -75,7 +76,7 @@
 
     <h:body>
         <h:form>
-
+            
             <div class="vertical-nav bg-white" id="sidebar">
                 <div class="py-4 px-3 mb-4 bg-light">
                     <div class="media d-flex align-items-center">
@@ -91,59 +92,74 @@
                 <ul class="nav flex-column bg-black mb-0" onmousedown="true">
                     
                     <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Registrar Artistas" actionListener="#{interfaceAdmin.registrarArtistas()}" style="width:100%"/>
+                        <h:button value="Registrar artistas" class="btn btn-light btn-lg btn-block font-italic" outcome="artistasAdministrador.xhtml"></h:button>
                     </li>
                     <li></li>
                     <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Buscar Discos" actionListener="#{interfaceAdmin.verDiscos()}" style="width:100%"/>
+                        <h:button value="Buscar discos"  class="btn btn-lg btn-block font-italic" outcome="discosAdministrador.xhtml"></h:button>
                     </li>
                     <li></li>
                     <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Buscar Canciones" actionListener="#{interfaceAdmin.verCanciones()}" style="width:100%"/>
+                        <h:button value="Registrar canciones" class="btn btn-light btn-lg btn-block font-italic" outcome="cancionesAdministrador.xhtml"></h:button>
                     </li>
                     <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Cerrar Session" actionListener="#{interfaceAdmin.cerrarSessionAdmin()}" style="width:100%"/>
+                        <h:commandButton class="btn btn-lg btn-block font-italic" value="Cerrar Session" actionListener="#{interfaceAdmin.cerrarSessionAdmin()}" style="width:100%" immediate="true"/>
                     </li>
+                    
                 </ul>
             </div>
+            
+            
             <div class="page-content p-5" id="content">
                 <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4">
                     <i class="fa fa-bars mr-2"></i>
                     <small class="text-uppercase font-weight-bold">Menú</small>
                 </button>
                 
-                <p:dataTable id="DT_artistas" value="#{administrador.listaArtista}" var ="artista" paginator="true" editable="true" >
+            <p:dataTable id="DT_artistas" value="#{administrador.listaArtista}" var ="artista" paginator="true" editable="true" 
+                             rows="5"
+                             rowsPerPageTemplate="5,10,15,100"
+                             paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"   >
 
                     <f:facet name="header">
                         ARTISTAS
                     </f:facet>
 
-                    <p:column headerText="Nombre Artístico">
+                    <p:column headerText="Nombre Artístico" filterBy="#{artista.nombreArtistico}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{artista.nombreArtistico}" /></f:facet>
                             <f:facet name="input"><p:inputText id="I_nombreA" required="true" value="#{artista.nombreArtistico}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Nombre Nacimiento">
+                    <p:column headerText="Nombre Nacimiento" filterBy="#{artista.nombreNacimiento}" filterMatchMode="contains">
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{artista.nombreNacimiento}" /></f:facet>
+                            <f:facet name="output">
+                                <h:outputText value="#{artista.nombreNacimiento}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </f:facet>
                             <f:facet name="input"><p:inputText id="I_nombreN" required="true" value="#{artista.nombreNacimiento}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Fecha de Nacimiento">
+                    <p:column headerText="Fecha de Nacimiento" filterBy="#{artista.fechaNacimiento}" filterMatchMode="contains">
                         <p:cellEditor>
-                            <f:facet name="output"><h:outputText value="#{artista.fechaNacimiento}" /></f:facet>
+                            <f:facet name="output">
+                                <h:outputText value="#{artista.fechaNacimiento}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText> 
+                            </f:facet>
                             <f:facet name="input"><p:inputText id="I_fechaN" required="true" value="#{artista.fechaNacimiento}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Genero">
+                    <p:column headerText="Genero" filterBy="#{artista.genero}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{artista.genero}" /></f:facet>
                             <f:facet name="input"><p:inputText id="I_genero" required="true" value="#{artista.genero}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
                     <p:column headerText="Ver discos..">
-                        <h:commandButton value="Ver discos..." actionListener="#{administrador.verDiscosArtista(artista)}"/>
+                        <h:commandButton value="Ver discos..." actionListener="#{administrador.verDiscosArtista(artista)}" immediate="true"/>
                     </p:column>
                 </p:dataTable>
                 
@@ -157,12 +173,6 @@
                     <p:inputText id="idNombreA" value="#{administrador.nombreArtistico}" required="true" maxlength="20" label="Nombre Artístico"/>
                     <p:message for="idNombreA" />
 
-                    <h:outputLabel value="Fecha de nacimiento" for="idFechaN" />
-                    <p:inputText id="idFechaN" type="date" value="#{administrador.fechaNacimiento}" required="true" p:placeholder="DD/MM/AAAA" label="Fecha">
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </p:inputText>
-                    <p:message for="idFechaN" />
-
                     <h:outputLabel value="Genero Músical" for="idGenero" />
                     <h:selectManyCheckbox  id="idGenero" value="#{administrador.genero}" class="form-control text-center my-2" required="true" label="Genero musical">
                         <f:selectItem itemValue="POP-" itemLabel="POP"></f:selectItem>
@@ -175,20 +185,19 @@
 
                     <p:message for="idGenero" />
                     
-                    <p:commandButton  icon="pi pi-check" value="Registrar artista" validateClient="true" actionListener="#{administrador.crearNuevoArtista()}"/>
+                    <h:outputLabel value="Fecha de nacimiento" for="idFechaN" />
+                    <p:inputText id="itFecha" value="${administrador.fechaNacimiento}" required="true" label="Fecha"  >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </p:inputText>
+                    <p:message for="itFecha" /> 
+                    
+                    <h:commandButton   value="Registrar artista"  actionListener="#{administrador.crearNuevoArtista()}"/>
                     
                 </h:panelGrid> 
-
-
             </div>
-
+            
+            <script src="resources/js/JavaScript.js"></script>
         </h:form>
-
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-        <script src="resources/js/JavaScript.js"></script>
-
     </h:body>
 </html>
 

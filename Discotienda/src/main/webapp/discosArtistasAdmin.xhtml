@@ -80,7 +80,7 @@
                 <div class="py-4 px-3 mb-4 bg-light">
                     <div class="media d-flex align-items-center">
                         <div class="media-body">
-                            <h:outputText class="font-weight-bolder" style="font-size: 24px" value="Camilo"></h:outputText>
+                            <h:outputText class="font-weight-bolder" style="font-size: 24px" value="#{interfaceAdmin.nombre}"></h:outputText>
                             <p class="font-weight-light text-muted mb-0">Usuario</p>
                         </div>
                     </div>
@@ -90,15 +90,18 @@
 
                 <ul class="nav flex-column bg-white mb-0">
                     <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Registrar Artistas" actionListener="#{interfaceAdmin.registrarArtistas()}" style="width:100%"/>
+                        <h:button value="Registrar artistas" class="btn btn-light btn-lg btn-block font-italic" outcome="artistasAdministrador.xhtml"></h:button>
                     </li>
                     <li></li>
                     <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Buscar Discos" actionListener="#{interfaceAdmin.verDiscos()}" style="width:100%"/>
+                        <h:button value="Buscar discos"  class="btn btn-lg btn-block font-italic" outcome="discosAdministrador.xhtml"></h:button>
                     </li>
                     <li></li>
                     <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Buscar Canciones" actionListener="#{interfaceAdmin.verCanciones()}" style="width:100%"/>
+                        <h:button value="Registrar canciones" class="btn btn-light btn-lg btn-block font-italic" outcome="cancionesAdministrador.xhtml"></h:button>
+                    </li>
+                    <li class="nav-item">
+                        <h:commandButton class="btn btn-lg btn-block font-italic" value="Cerrar Session" actionListener="#{interfaceAdmin.cerrarSessionAdmin()}" style="width:100%" immediate="true"/>
                     </li>
                 </ul>
             </div>
@@ -112,38 +115,38 @@
                     <f:facet name="header">
                         DISCOS
                     </f:facet>
-                    <p:column headerText="Nombre">
+                    <p:column headerText="Nombre" filterBy="#{discos.nombreDisco}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{discos.nombreDisco}" /></f:facet>
                             <f:facet name="input"><p:inputText id="I_nombreD" required="true" value="#{discos.nombreDisco}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Fecha publicacion">
+                    <p:column headerText="Fecha publicacion" filterBy="#{discos.fechaPublicacion}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{discos.fechaPublicacion}" /></f:facet>
                             <f:facet name="input"><p:inputText id="I_fechaP" required="true" value="#{discos.fechaPublicacion}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Genero">
+                    <p:column headerText="Genero" filterBy="#{discos.genero}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{discos.genero}" /></f:facet>
                             <f:facet name="input"><p:inputText id="I_genero" required="true" value="#{discos.genero}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Precio">
+                    <p:column headerText="Precio" filterBy="#{discos.precio}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{discos.precio}" /></f:facet>
                             <f:facet name="input"><p:inputText id="I_precio" required="true" value="#{discos.precio}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Duración">
+                    <p:column headerText="Duración" filterBy="#{discos.duracion}" filterMatchMode="contains">
                         <p:cellEditor>
                             <f:facet name="output"><h:outputText value="#{discos.duracion}" /></f:facet>
                             <f:facet name="input"><p:inputText id="I_duracion" required="true" value="#{discos.duracion}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
                     <p:column headerText="Ver canciones..">
-                        <h:commandButton value="Ver canciones..." actionListener="#{discosArAd.verCancionesDiscos(discos)}"/>
+                        <h:commandButton value="Ver canciones..." actionListener="#{discosArAd.verCancionesDiscos(discos)}" immediate="true"/>
                     </p:column>
                 </p:dataTable>
                 <h:panelGrid id="registroDiscos" columns="3" cellpadding="3">
@@ -189,9 +192,7 @@
 
         </h:form>
 
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        
         <script src="resources/js/JavaScript.js"></script>
 
     </h:body>

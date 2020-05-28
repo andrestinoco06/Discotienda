@@ -75,8 +75,7 @@ public class ArtistasAdministrador implements Serializable{
         for(int i=0;i<genero.length;i++){
             generoA = generoA+genero[i];
         }        
-        String fecha = fechaNacimiento.getDay() + "-" + fechaNacimiento.getMonth() + "-" + fechaNacimiento.getYear();
-        listaArtista.add(new Artista(listaArtista.size()+1, nombreArtistico, nombreNacimiento, generoA, fecha));
+        listaArtista.add(new Artista(listaArtista.size()+1, nombreArtistico, nombreNacimiento, generoA, fechaNacimiento));
         new lecturaEscrituraArtista().agregarArtista(listaArtista);
     }
     
