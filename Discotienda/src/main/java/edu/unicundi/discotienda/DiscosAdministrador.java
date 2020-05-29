@@ -38,7 +38,8 @@ public class DiscosAdministrador implements Serializable{
 
     public void verMasDisco(Disco disco){
         try {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("cancionesDiscoAdmin.xhtml?disco="+disco.getId());
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("idDisco", disco.getId());
+            FacesContext.getCurrentInstance().getExternalContext().redirect("cancionesDiscoAdmin.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(ArtistasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
         }
