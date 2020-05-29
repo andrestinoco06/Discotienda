@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.unicundi.discotienda;
 
 import edu.unicundi.logic.ServiceBusquedaCompra;
@@ -17,18 +12,29 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author johan
+ * Bean para procesar las acciones que se esten realizando en su correspondiente vista.
+ * @author Camilo Tinoco
+ * @author Johan Zambrano
+ * @version 1.0.0
  */
 @Named(value = "historialCompra")
 @RequestScoped
 public class HistorialCompraUsuario implements Serializable {
 
+    /**
+     * Lista de tipo BusquedaCompra para almacenar las compras del usuario.
+     */
     List<BusquedaCompra> listaCarrito;
 
+    /**
+     * Inyeccion de dependencias para acceder a los atributos y métodos de serviceCompra.
+     */
     @Inject
     private ServiceBusquedaCompra serviceCompra;
 
+    /**
+     * PostConstructor para cargar el dataTable, el cual recibe la listaCarrito.
+     */
     @PostConstruct
     public void init() {
         listaCarrito = new ArrayList<>();

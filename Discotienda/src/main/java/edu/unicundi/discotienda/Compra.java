@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.unicundi.discotienda;
 
 import edu.unicundi.logic.ServiceCancion;
@@ -28,31 +23,55 @@ import javax.inject.Named;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author johan
+ * Bean para procesar las acciones que se esten realizando en su correspondiente vista.
+ * @author Camilo Tinoco
+ * @author Johan Zambrano
+ * @version 1.0.0
  */
 @Named(value = "compraUsuario")
 @SessionScoped
 public class Compra implements Serializable {
 
+    /**
+     * Variables de tipo String para almacenar los datos tipo y nombre de la compra.
+     */
     private String tipo, nombre;
 
+    /**
+     * List de tipo BusquedaCompra para almacenar la compra que se este realizando.
+     */
     private List<BusquedaCompra> listaCompra;
 
+    /**
+     * * List de tipo BusquedaCompra para almacenar la compra que se este realizando.
+     */
     private List<BusquedaCompra> carrito;
 
+    /**
+     * Inyeccion de dependencias para acceder a los atributos y métodos de serviceBusquedaCompra.
+     */
     @Inject
     private ServiceBusquedaCompra serviceBusquedaCompra;
 
+    /**
+     * PostConstructor vacío
+     */
     @PostConstruct
     public void init() {
     }
 
+    /**
+     * Método que busca la BusquedaCompra según el nombre y tipo del usuario.
+     */
     public void buscar() {
         listaCompra = new ArrayList<>();
         listaCompra = serviceBusquedaCompra.realizarBusqueda(nombre, tipo);
     }
 
+    /**
+     * Método para agregar canciones al carrito de compras.
+     * @param busqueda 
+     */
     public void agregarCarrito(BusquedaCompra busqueda) {
         if (carrito == null) {
             carrito = new ArrayList<>();

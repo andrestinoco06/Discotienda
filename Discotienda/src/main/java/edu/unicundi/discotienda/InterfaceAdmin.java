@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.unicundi.discotienda;
 
 import edu.unicundi.logic.ServiceUsuario;
@@ -19,18 +14,29 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author johan
+ * Bean para procesar las acciones que se esten realizando en su correspondiente vista.
+ * @author Camilo Tinoco
+ * @author Johan Zambrano
+ * @version 1.0.0
  */
 @Named(value = "interfaceAdmin")
 @ViewScoped
 public class InterfaceAdmin implements Serializable {
 
+    /**
+     * Variable de tipo String para almacenar el nombre del administrador.
+     */
     private String nombre;
 
+    /**
+     * Inyeccion de dependencias para acceder a los atributos y métodos de serviceUsuario.
+     */
     @Inject
     private ServiceUsuario serviceUsuario;
 
+    /**
+     * PostConstructor para obtener el usuario que se esta logueando.
+     */
     @PostConstruct
     public void init() {
         if (serviceUsuario.validacionUsuario()) {
@@ -44,6 +50,9 @@ public class InterfaceAdmin implements Serializable {
         }
     }
 
+    /**
+     * Método para cerrar la sesión del usuario que se logueo en el navegador.
+     */
     public void cerrarSessionAdmin() {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("sessionAdministrador", false);
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("idSessionAdministrador", null);
@@ -57,6 +66,9 @@ public class InterfaceAdmin implements Serializable {
         
     }
 
+    /**
+     * Método que direcciona a la vista artistaAdministrador.
+     */
     public void registrarArtistas() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("artistasAdministrador.xhtml");
@@ -65,6 +77,9 @@ public class InterfaceAdmin implements Serializable {
         }
     }
 
+    /**
+     * * Método que direcciona a la vista discosAdministrador.
+     */
     public void verDiscos() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("discosAdministrador.xhtml");
@@ -73,6 +88,10 @@ public class InterfaceAdmin implements Serializable {
         }
     }
 
+    
+    /**
+     * Método que direcciona a la vista cancionesAdministrador.
+     */
     public void verCanciones() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("cancionesAdministrador.xhtml");

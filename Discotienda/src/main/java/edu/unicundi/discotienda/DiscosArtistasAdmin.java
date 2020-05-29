@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.unicundi.discotienda;
 
 import edu.unicundi.lecturaEscritura.lecturaEscrituraDisco;
@@ -25,34 +20,70 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author johan
+ * Bean para procesar las acciones que se esten realizando en su correspondiente vista.
+ * @author Camilo Tinoco
+ * @author Johan Zambrano
+ * @version 1.0.0
  */
 @Named(value = "discosArAd")
 @ViewScoped
 public class DiscosArtistasAdmin implements Serializable {
 
-    private int idArtista;
+    /**
+     * Variables de tipo String para almacenar los datos del nombreDisco del Disco.
+     */
     private String nombreDisco;
+    
+    /**
+     * Variables de tipo int para almacenar los datos idArtista y duracion del Disco.
+     */
+    private int idArtista, duracion;
+    
+    /**
+     * Variable de tipo Date para almacenar las fechaPublicacion del Disco.
+     */
     private Date fechaPublicacion;
+    
+    /**
+     * Variable de tipo long para almacenar el precio del Disco.
+     */
     private long precio;
-    private int duracion;
+    
+    /**
+     * Variable Array de String para almacenar los generos del Disco.
+     */
     private String[] genero;
 
+    /**
+     * List de tipo Disco para almacenar los Discos registrados.
+     */
     private List<Disco> listaDiscos;
 
+    /**
+     * Constructor de prueba.
+     */
     public DiscosArtistasAdmin() {
         System.out.println(" -  - -- - - entro al constructor DISCOS ");
     }
 
+    /**
+     * Inyeccion de dependencias para acceder a los atributos y métodos de serviceDisco.
+     */
     @Inject
     private ServiceDisco serviceDisco;
 
+    /**
+     * PostConstructor para cargar los Discos en la vista.
+     */
     @PostConstruct
     public void init() {
         cargarDiscos();
     }
 
+    /**
+     * Método para ver las canciones del Disco.
+     * @param discos 
+     */
     public void verCancionesDiscos(Disco discos) {
         try {
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("idDisco", discos.getId());
@@ -62,6 +93,9 @@ public class DiscosArtistasAdmin implements Serializable {
         }
     }
 
+    /**
+     * Método para almacenar las canciones registradas en la lista para posteriormente su visualizacion.
+     */
     public void cargarDiscos() {
         if (!FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idArtista").equals(null)) {
             idArtista = (int) (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idArtista"));
@@ -83,6 +117,9 @@ public class DiscosArtistasAdmin implements Serializable {
         }
     }
 
+    /**
+     * Método para crear un nuevo Disco.
+     */
     public void crearNuevoDisco() {
         System.out.println(" antes de añadir ");
         List<Disco> totalDiscos = new ArrayList<>();
