@@ -29,8 +29,8 @@
                                 <h:inputText class="form-control text-center"  required="true" value="#{login.usuario}"></h:inputText>
                                 <h5 class="card-title">Contraseña</h5>
                                 <p:inputText type="password"  class="form-control text-center" required="true" value="#{login.clave}"></p:inputText>
-                                <p:commandButton class="mt-4 btn btn-info" value="Iniciar sesión" validateClient="true" icon="pi pi-home" actionListener="#{login.iniciarSesion()}"></p:commandButton>
-                                <p:commandButton class="mt-4 btn btn-info" value="Registrar" immediate="true" icon="pi pi-home" actionListener="#{login.registrar()}"></p:commandButton>
+                                <p:commandButton class="mt-4 btn btn-info m-1" value="Iniciar sesión" validateClient="true" actionListener="#{login.iniciarSesion()}"></p:commandButton>
+                                <p:commandButton class="mt-4 btn btn-info m-1" value="Registrar" immediate="true" actionListener="#{login.registrar()}"></p:commandButton>
                             </div>
                             <div class="card-footer text-muted">&copy;
                                 2020
@@ -40,9 +40,6 @@
                     <div class="col-4"></div>
                 </div>
             </div>
-            <h:panelGrid id="registroArtistas" columns="3" cellpadding="3">
-                <p:commandButton  icon="pi pi-check" value="Crear archivos" validateClient="true" actionListener="#{login.crearArchivos()}"/>
-            </h:panelGrid>
         </h:form>
     </h:body>
 </html>
