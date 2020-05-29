@@ -19,11 +19,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author johan
+ * Funcion que realiza la lectura, escritura de Archivos por parte del Carrito
+ * @author Johan Zambrano
+ * @author Camilo Tinoco
  */
 public class lecturaEscrituraCarrito {
-    
+
+    /**
+     * Funcion que crea el archivo del Carrito
+     *
+     * @param lista recibe la lista de tipo BusquedaCompra con los datos a guardar
+     */
     public void crearArchivo(List<BusquedaCompra> lista) {
         try {
 
@@ -40,6 +46,11 @@ public class lecturaEscrituraCarrito {
 
     }
 
+    /**
+     * Funcion que agrega un dato nuevo al carrito
+     *
+     * @param lista trae todos los datos a agregar
+     */
     public void agregarCarro(List<BusquedaCompra> lista) {
 
         //Borra el fichero
@@ -61,15 +72,20 @@ public class lecturaEscrituraCarrito {
         }
     }
 
+    /**
+     * Funcion que retorna una lista con los datos que estaban en el archivo
+     *
+     * @return lista de BusquedaCompra
+     */
     public List<BusquedaCompra> verCarro() {
         List<BusquedaCompra> listaL = null;
         FileInputStream fis = null;
         try {
             fis = new FileInputStream("C:\\Users\\johan\\Desktop\\Ingenieria de Sistemas\\Linea de profundizacion I\\RepositoriosCompartidos\\Discotienda\\ACarro.txt");
-            if(fis != null){
+            if (fis != null) {
                 ObjectInputStream listaEntrada = new ObjectInputStream(fis);
                 listaL = (List<BusquedaCompra>) listaEntrada.readObject();
-            }else{
+            } else {
                 System.out.println("NO ENCONTRO ARTISTA, NO EXISTE EL ARCHIVO");
             }
         } catch (FileNotFoundException ex) {
@@ -81,5 +97,5 @@ public class lecturaEscrituraCarrito {
         }
         return listaL;
     }
-    
+
 }

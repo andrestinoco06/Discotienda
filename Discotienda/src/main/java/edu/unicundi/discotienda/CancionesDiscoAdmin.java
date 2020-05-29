@@ -26,34 +26,64 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author johan
+ * Bean para procesar las acciones que se esten realizando en la vista CancionesDiscoAdmin
+ * @author Johan Zambrano
+ * @author Camilo Tinoco
  */
 @Named(value = "cancionesDisAdmin")
 @ViewScoped
 public class CancionesDiscoAdmin implements Serializable {
-
+    /*
+    * Guarda la lista de las canciones que corresponden al Disco seleccionado
+    */
     private List<Cancion> listaCancion;
+    /**
+     * Variable que guarda el id del disco
+     */
     private int idDisco;
-
+    /**
+     * Variable que guarda el nombre de la canción 
+     */
     private String nombreCancion;
+    /**
+     * Variable que guarda la duración de la cancion
+     */
     private int duracion;
+    /*
+     * Variable de tipo Array que guarda el genero de las canciones
+     */
     private String[] genero;
+    /**
+     * Variable de tipo Date que guarda la fecha de publicacion
+     */
     private Date fechaPublicacion;
+    /**
+     * Variable que guarda el precio de la canción
+     */
     private int precio;
-
+    
+    /**
+     * Constructor vacio principal
+     */
+    
     public CancionesDiscoAdmin() {
 
     }
-
+    /**
+     * Variable de tipo inject, hace la injeccion a ServiceCancion
+     */
     @Inject
     private ServiceCancion serviceCancion;
-
+    /**
+     * PostConstruct que carga las canciones respectivas
+     */
     @PostConstruct
     public void init() {
         cargarCanciones();
     }
-
+    /**
+     * Funcion que carga las canciones que corresponde al disco
+     */
     public void cargarCanciones() {
         if (!FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idDisco").equals(null)) {
             List<Cancion> listaBusqueda = new ArrayList<>();
@@ -73,7 +103,9 @@ public class CancionesDiscoAdmin implements Serializable {
             }
         }
     }
-
+    /**
+     * Crea una canción al disco
+     */
     public void crearNuevaCancion() {
         List<Cancion> totalCanciones = new ArrayList<>();
         totalCanciones = serviceCancion.getListaCancion();

@@ -26,11 +26,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author johan
+ * Funcion que realiza la lectura, escritura de Archivos por parte del Artista
+ * @author Johan Zambrano
+ * @author Camilo Tinoco
  */
 public class lecturaEscrituraArtista {
-
+    /**
+     * Funcion que crea el archivo del artista
+     * @param lista recibe la lista de tipo Artista con los datos a guardar
+     */
     public void crearArchivo(List<Artista> lista) {
         System.out.println("ENTRO CREAR ARTISTA");
         try {
@@ -50,7 +54,10 @@ public class lecturaEscrituraArtista {
         }
 
     }
-
+    /**
+     * Funcion que agrega un artista nuevo 
+     * @param lista trae todos los datos a agregar
+     */
     public void agregarArtista(List<Artista> lista) {
 
         //Borra el fichero
@@ -74,7 +81,10 @@ public class lecturaEscrituraArtista {
             Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /**
+     * Funcion que retorna una lista con los datos que estaban en el archivo
+     * @return lista de artistas
+     */
     public List<Artista> verArtistas() {
         List<Artista> listaL = null;
         FileInputStream fis = null;

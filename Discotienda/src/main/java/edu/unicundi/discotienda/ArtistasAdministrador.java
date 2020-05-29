@@ -30,32 +30,59 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author johan
+ * Bean para procesar las acciones que se esten realizando en la vista ArtistasAdministrador
+ * @author Johan Zambrano,
+ * @author Camilo Tinoco
  */
 @Named(value = "administrador")
 @ViewScoped 
 public class ArtistasAdministrador implements Serializable{
-    
+    /*
+    * Variable de tipo Artistas que va a ir almacenando la lista de los artistas traida desde los archivos y la muestra
+    * en el datatable de la vista
+    */
     private List<Artista> listaArtista;
-    
+    /*
+    * Variable de tipo id que almacena el Id
+    */
     private int id;
+    /*
+    * Variable de tipo String que almacena el nombre de nacimiento del artista
+    */
     private String nombreNacimiento;
+    /*
+    * Variable de tipo String que almacena el nombre artístico 
+    */
     private String nombreArtistico;
+    /*
+    * Variable de tipo Array de String que almacena el genero del artista
+    */
     private String[] genero;
+    /*
+    * Variable de tipo Date que guarda la fecha de nacimiento del artista
+    */
     private Date fechaNacimiento;
+    /*
+    * Constructor principal
+    */
     
     public ArtistasAdministrador(){
     }
-    
+    /*
+    * Variable que realiza la injeccion del ServiceArtista
+    */
     @Inject
     private ServiceArtista serviceArtista;
-    
+    /*
+    * PostConstructor que guarda la lista de todos los artistas creados
+    */
     @PostConstruct
     public void init() {
         this.listaArtista = serviceArtista.getListaArtista();
     }
-    
+    /*
+    * Funcion que redirecciona al usuario a la vista discosArtistasAdmin con el id correspondiente del artista para mostrar sus discos
+    */
     public void verDiscosArtista(Artista artista){
         try {
             id = artista.getId();
@@ -66,7 +93,9 @@ public class ArtistasAdministrador implements Serializable{
             Logger.getLogger(ArtistasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /*
+    * Crea nuevo artista
+    */
     public void crearNuevoArtista(){
         String generoA = "";
         for(int i=0;i<genero.length;i++){

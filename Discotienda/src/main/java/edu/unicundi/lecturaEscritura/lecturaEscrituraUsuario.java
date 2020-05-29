@@ -26,11 +26,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author johan
+ * Funcion que realiza la lectura, escritura de Archivos por parte del Usuario
+ * @author Johan Zambrano
+ * @author Camilo Tinoco
  */
 public class lecturaEscrituraUsuario {
-    
+    /**
+     * Funcion que crea el archivo del Usuario
+     *
+     * @param lista recibe la lista de tipo UsuarioModel con los datos a guardar
+     */
     public void crearArchivo(List<UsuarioModel> lista) throws IOException {
         try {
             FileOutputStream fos = new FileOutputStream("C:\\Users\\johan\\Desktop\\Ingenieria de Sistemas\\Linea de profundizacion I\\RepositoriosCompartidos\\Discotienda\\AUsuarios.txt");
@@ -46,6 +51,11 @@ public class lecturaEscrituraUsuario {
 
     }
 
+    /**
+     * Funcion que agrega un usuario nuevo
+     *
+     * @param lista trae todos los datos a agregar
+     */
     public void agregarUsuario(List<UsuarioModel> lista) {
         //Borra el fichero
         try {
@@ -66,15 +76,20 @@ public class lecturaEscrituraUsuario {
         }
     }
 
+    /**
+     * Funcion que retorna una lista con los datos que estaban en el archivo
+     *
+     * @return lista de UsuarioModel
+     */
     public List<UsuarioModel> verUsuarios() {
         List<UsuarioModel> listaL = null;
         FileInputStream fis = null;
         try {
             fis = new FileInputStream("C:\\Users\\johan\\Desktop\\Ingenieria de Sistemas\\Linea de profundizacion I\\RepositoriosCompartidos\\Discotienda\\AUsuarios.txt");
-            if(fis != null){
+            if (fis != null) {
                 ObjectInputStream listaEntrada = new ObjectInputStream(fis);
                 listaL = (List<UsuarioModel>) listaEntrada.readObject();
-            }else{
+            } else {
                 System.out.println("NO ENCONTRO ARTISTA, NO EXISTE EL ARCHIVO");
             }
         } catch (FileNotFoundException ex) {

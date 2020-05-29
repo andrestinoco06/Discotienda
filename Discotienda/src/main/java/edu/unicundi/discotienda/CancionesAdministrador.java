@@ -22,22 +22,31 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author johan
+ * Bean para procesar las acciones que se esten realizando en la vista CancionesAdministrador
+ * @author Johan Zambrano
+ * @author Camilo tinoco
  */
 @Named(value = "cancionesAdministrador")
 @ViewScoped 
 public class CancionesAdministrador implements Serializable{
-    
+    /*
+    * Guarda la lista de todas las canciones
+    */
     private List<Cancion> listaCancion;
-    
+    /*
+    * Constructor vacio
+    */
     public CancionesAdministrador (){
         
     }
-    
+    /*
+    * Variable que realiza la injeccion al ServiceCancion
+    */
     @Inject
     private ServiceCancion serviceCancion;
-    
+    /*
+    *PostConstructor que realiza la busqueda de todas las canciones que pertenecen al disco
+    */
     @PostConstruct
     public void init() {
         this.listaCancion = serviceCancion.getListaCancion();
@@ -50,7 +59,9 @@ public class CancionesAdministrador implements Serializable{
     public void setListaCancion(List<Cancion> listaCancion) {
         this.listaCancion = listaCancion;
     }
-    
+    /*
+    * Funcion que redirecciona la vista
+    */
     public void verMasCancion(Cancion cancion){
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("informacionAdicional.xhtml?informacion="+cancion.getId()+"&tipo="+2);

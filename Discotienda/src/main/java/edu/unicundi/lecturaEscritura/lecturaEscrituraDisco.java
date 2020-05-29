@@ -20,11 +20,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author johan
+ * Funcion que realiza la lectura, escritura de Archivos por parte del Disco
+ * @author Johan Zambrano
+ * @author Camilo Tinoco
  */
 public class lecturaEscrituraDisco {
 
+    /**
+     * Funcion que crea el archivo del Disco
+     *
+     * @param lista recibe la lista de tipo Disco con los datos a guardar
+     */
     public void crearArchivo(List<Disco> lista) {
         System.out.println("ENTRO CREAR DISCO");
         try {
@@ -43,6 +49,11 @@ public class lecturaEscrituraDisco {
         }
     }
 
+    /**
+     * Funcion que retorna una lista con los datos que estaban en el archivo
+     *
+     * @return lista de Disco
+     */
     public List<Disco> verDiscos() {
         List<Disco> listaL = null;
         try {
@@ -59,6 +70,11 @@ public class lecturaEscrituraDisco {
         return listaL;
     }
 
+    /**
+     * Funcion que agrega un disco nuevo
+     *
+     * @param lista trae todos los datos a agregar
+     */
     public void agregarDisco(List<Disco> lista) {
 
         //Borra el fichero
@@ -82,5 +98,5 @@ public class lecturaEscrituraDisco {
             Logger.getLogger(lecturaEscrituraArtista.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }
