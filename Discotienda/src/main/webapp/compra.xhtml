@@ -134,7 +134,11 @@
                 </h:panelGrid> 
 
                 
-                <p:dataTable id="DT_busqueda" value="#{compraUsuario.listaCompra}" var ="busqueda" paginator="true" editable="true">
+                <p:dataTable id="DT_busqueda" value="#{compraUsuario.listaCompra}" var ="busqueda" paginator="true" editable="true"
+                             rows="5"
+                             rowsPerPageTemplate="5,10,15,100"
+                             paginatorTemplate=" {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} registros"   >
 
                     <f:facet name="header">
                         RESULTADOS BUSQUEDA

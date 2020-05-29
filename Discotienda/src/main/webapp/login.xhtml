@@ -28,7 +28,7 @@
                                 <h5 class="card-title">Documento de identidad</h5>
                                 <h:inputText class="form-control text-center"  required="true" value="#{login.usuario}"></h:inputText>
                                 <h5 class="card-title">Contraseña</h5>
-                                <h:inputText class="form-control text-center" required="true" value="#{login.clave}"></h:inputText>
+                                <p:inputText type="password"  class="form-control text-center" required="true" value="#{login.clave}"></p:inputText>
                                 <p:commandButton class="mt-4 btn btn-info" value="Iniciar sesión" validateClient="true" icon="pi pi-home" actionListener="#{login.iniciarSesion()}"></p:commandButton>
                             </div>
                             <div class="card-footer text-muted">&copy;
