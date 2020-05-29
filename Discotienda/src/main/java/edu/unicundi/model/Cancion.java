@@ -9,19 +9,43 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- *
- * @author johan
+ * Modelo para almacenar los atributos de Cancion.
+ * @author Camilo Tinoco
+ * @author Johan Zambrano
+ * @version 1.0.0
  */
 public class Cancion implements Serializable {
     
-    private int id;
-    private int idDisco;
-    private String nombreCancion;
-    private int duracionCancion;
+    /**
+     * Variables tipo String para almacenar los datos nombreCancion, genero del Disco.
+     */
+    private String nombreCancion, genero;
+    
+    /**
+     * Variables tipo int para almacenar los datos id, idDisco, duracionCancion del Disco.
+     */
+    private int id, idDisco, duracionCancion;
+    
+    /**
+     * Variable tipo Date para almacenar la fechaPublicacion del Disco.
+     */
     private Date fechaPublicacion;
-    private String genero;
+    
+    /**
+     * Variable tipo long para almacenar el precio del Disco.
+     */
     private long precio;
 
+    /**
+     * Constructor para inicializar los atributos de la clase Cancion.
+     * @param id
+     * @param idDisco
+     * @param nombreCancion
+     * @param duracionCancion
+     * @param fechaPublicacion
+     * @param genero
+     * @param precio 
+     */
     public Cancion(int id, int idDisco, String nombreCancion, int duracionCancion, Date fechaPublicacion, String genero, long precio) {
         this.id = id;
         this.idDisco = idDisco;

@@ -3,17 +3,37 @@ package edu.unicundi.model;
 import java.io.Serializable;
 
 /**
- *
+ *  Modelo para almacenar los atributos de Usuario
  * @author Camilo Tinoco
  * @author Johan Zambrano
  * @version 1.0.0
  */
 public class UsuarioModel implements Serializable{
     
+    /**
+     * Variables String para almacenar los datos nombre, apellido, correo, direccion,
+     * documento, contrasena, telefono.
+     */
     private String nombre, apellido, correo, direccion, documento, contrasena, telefono;
     
+    /**
+     * Variables int para almacenar los datos id, edad, idRol.
+     */
     private int id, edad, idRol;
 
+    /**
+     * Constructor para inicializar los atributos de la clase.
+     * @param id
+     * @param nombre
+     * @param apellido
+     * @param correo
+     * @param direccion
+     * @param documento
+     * @param contrasena
+     * @param edad
+     * @param idRol
+     * @param telefono 
+     */
     public UsuarioModel(int id, String nombre, String apellido, String correo, String direccion, String documento, String contrasena, int edad, int idRol, String telefono){
         this.id = id;
         this.nombre = nombre;

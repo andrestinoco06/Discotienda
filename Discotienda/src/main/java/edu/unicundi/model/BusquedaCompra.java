@@ -8,15 +8,41 @@ package edu.unicundi.model;
 import java.io.Serializable;
 
 /**
- *
- * @author johan
+ * Modelo para almacenar los atributos de BusquedaCompra
+ * @author Camilo Tinoco
+ * @author Johan Zambrano
  */
 public class BusquedaCompra implements Serializable{
     
-    private int id, idDisco, idCancion, idUsuario;
+    /**
+     * Variables tipo String para almacenar los datos nombreArtista, nombreDisco, nombreCancion, genero, tipo del Disco.
+     */
     private String nombreArtista, nombreDisco, nombreCancion, genero, tipo;
+    
+    /**
+     * Variables tipo int para almacenar los datos id, idDisco, idCancion, idUsuario del Disco.
+     */
+    private int id, idDisco, idCancion, idUsuario;
+    
+    /**
+     * Variables tipo long para almacenar los datos duracion y precio del Disco.
+     */
     private long duracion, precio;
 
+    /**
+     * Constructor para inicializar los atributos de la clase BusquedaCompra.
+     * @param id
+     * @param nombreArtista
+     * @param nombreDisco
+     * @param nombreCancion
+     * @param genero
+     * @param duracion
+     * @param precio
+     * @param tipo
+     * @param idDisco
+     * @param idCancion
+     * @param idUsuario 
+     */
     public BusquedaCompra(int id, String nombreArtista, String nombreDisco, String nombreCancion, String genero, long duracion, long precio, String tipo, int idDisco, int idCancion, int idUsuario) {
         this.id = id;
         this.nombreArtista = nombreArtista;

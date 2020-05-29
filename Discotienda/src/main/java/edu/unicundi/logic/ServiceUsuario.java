@@ -20,25 +20,39 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
- *
- * @author johan
+ * ServiceUsuario para realizar la logica correspondiente al modelo Usuario.
+ * @author Camilo Tinoco
+ * @author Johan Zambrano
  */
 @Named(value = "serviceUsuario")
 @RequestScoped
 public class ServiceUsuario {
     
+    /**
+     * List de tipo UsuarioModel para almacenar los usuarios.
+     */
     private List<UsuarioModel> listaUsuario;
     
+    /**
+     * Constructor vacío.
+     */
     public ServiceUsuario(){
         
     }
     
+    /**
+     * PostConstructor para ver los usuarios que se encuentran almacenados
+     */
     @PostConstruct
     public void init() {
         
         listaUsuario = new lecturaEscrituraUsuario().verUsuarios();
     }
     
+    /**
+     * Método que valida si el logueo del usuario es correcto, si es así retorna un true.
+     * @return boolean
+     */
     public boolean validacionUsuario(){
         if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionAdministrador").equals(true)){
             return true;
@@ -52,6 +66,10 @@ public class ServiceUsuario {
         }        
     }
     
+    /**
+     * Método que valida si el logueo del cliente es correcto, si es así retorna un true.
+     * @return boolean
+     */
     public boolean validacionCliente(){
         if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionCliente").equals(true)){
             return true;
@@ -65,10 +83,17 @@ public class ServiceUsuario {
         }        
     }
     
+    /**
+     * Método que agrega un nuevo usario al archivo.
+     * @param listaNuevo 
+     */
     public void agregarUsuario(List<UsuarioModel> listaNuevo){
         new lecturaEscrituraUsuario().agregarUsuario(listaNuevo);
     }
     
+    /**
+     * Método para quemar Usuarios en el archivo AUsuario.
+     */
     public void crearUsuario(){
         List<UsuarioModel> lista = new ArrayList<>();
         lista.add(new UsuarioModel(1, "Johan", "Zambrano", "prueba@hotmail.com", "cll falsa", "9999", "clave", 22, 1, "3046818117"));

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.unicundi.logic;
 
 import edu.unicundi.lecturaEscritura.lecturaEscrituraCancion;
@@ -17,24 +12,38 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 /**
- *
- * @author johan
+ * ServiceCancion para realizar la logica correspondiente al modelo Cancion.
+ * @author Camilo Tinoco
+ * @author Johan Zambrano
  */
 @Named(value = "serviceCancion")
 @RequestScoped
 public class ServiceCancion {
     
+    /**
+     * List de tipo Cancion para almacenar las canciones.
+     */
     List<Cancion> listaCancion;
     
+    /**
+     * Constructor vacío.
+     */
     public ServiceCancion(){
         
     }
     
+    /**
+     * PostConstructor para ver las canciones que se encuentran almacenados
+     */
     @PostConstruct
     public void init() {
         listaCancion = new lecturaEscrituraCancion().verCancion();
     }
     
+    /**
+     * Método para quemar Canciones en el archivo ACanciones.
+     * @throws ParseException 
+     */
     public void crearArchicoCancion() throws ParseException{
         List<Cancion> lista = new ArrayList<>();
         SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy"); 

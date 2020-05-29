@@ -1,27 +1,47 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.unicundi.model;
 
 import java.io.Serializable;
 import java.util.Date;
 
 /**
- *
- * @author johan
+ *  Modelo para almacenar los atributos del Disco.
+ * @author Camilo Tinoco
+ * @author Johan Zambrano
+ * @version 1.0.0
  */
 public class Disco implements Serializable{
     
-    private int id;
-    private int idArtista;
-    private long precio;
+    /**
+     * Variables String para almacenar los datos genero, nombreDisco.
+     */
+    private String genero, nombreDisco;
+    
+    /**
+     * Variables int para almacenar los datos id, idArtista.
+     */
+    private int id, idArtista;
+    
+    /**
+     * Variables long para almacenar los datos precio, duracion.
+     */
+    private long precio, duracion;
+    
+    /**
+     * Variable Date para almacenar la fechaPublicacion del Disco.
+     */
     private Date fechaPublicacion;
-    private String genero;
-    private long duracion;
-    private String nombreDisco;
 
+
+    /**
+     * Constructor para inicializar los datos de la clase Disco.
+     * @param id
+     * @param idArtista
+     * @param precio
+     * @param fechaPublicacion
+     * @param genero
+     * @param duracion
+     * @param nombreDisco 
+     */
     public Disco(int id, int idArtista, long precio, Date fechaPublicacion, String genero, long duracion, String nombreDisco) {
         this.id = id;
         this.idArtista = idArtista;

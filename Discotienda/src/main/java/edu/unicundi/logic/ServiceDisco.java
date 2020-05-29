@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.unicundi.logic;
 
 import edu.unicundi.lecturaEscritura.lecturaEscrituraDisco;
@@ -17,24 +12,38 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 /**
- *
- * @author johan
+ * ServiceDisco para realizar la logica correspondiente al modelo Disco.
+ * @author Camilo Tinoco
+ * @author Johan Zambrano
  */
 @Named(value = "serviceDisco")
 @RequestScoped
 public class ServiceDisco {
     
+    /**
+     * List de tipo Disco para almacenar los discos.
+     */
     List<Disco> listaDisco;
     
+    /**
+     * Constructor vacío
+     */
     public ServiceDisco(){
         
     }
     
+    /**
+     * PostConstructor para ver los discos que se encuentran almacenados
+     */
     @PostConstruct
     public void init() {
         listaDisco = new lecturaEscrituraDisco().verDiscos();
     }
     
+    /**
+     * Método para quemar Disco en el archivo ADiscos.
+     * @throws ParseException 
+     */
     public void crearArchicoDisco() throws ParseException{
         List<Disco> lista = new ArrayList<>();
         SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy"); 

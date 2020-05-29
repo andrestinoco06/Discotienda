@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.unicundi.logic;
 
 import edu.unicundi.lecturaEscritura.lecturaEscrituraArtista;
@@ -18,25 +13,39 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 /**
- *
- * @author johan
+ * ServiceArtista para realizar la logica correspondiente al modelo Artista.
+ * @author Camilo Tinoco
+ * @author Johan Zambrano
  */
 @Named(value = "serviceArtista")
 @RequestScoped
 public class ServiceArtista {
     
+    /**
+     * List de tipo Artista para almacenar los artistas.
+     */
     private List<Artista> listaArtista;
     
+    /**
+     * Constructor vacío
+     */
     public ServiceArtista(){
         
     }
     
+    /**
+     * PostConstructor para ver los artistas que se encuentran almacenados
+     */
     @PostConstruct
     public void init() {
         System.out.println(" entro al POSTconstructor SERVICE");
         listaArtista = new lecturaEscrituraArtista().verArtistas();
     }
     
+    /**
+     * Método para quemar Artistas en el archivo AArtistas.
+     * @throws ParseException 
+     */
     public void crearArtista() throws ParseException{
         System.out.println(" entro al METODO CREAR ARTISTA ");
         SimpleDateFormat objSDF = new SimpleDateFormat("dd-mm-yyyy"); 

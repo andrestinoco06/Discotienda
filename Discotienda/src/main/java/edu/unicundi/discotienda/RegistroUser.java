@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.unicundi.discotienda;
 
 import edu.unicundi.logic.ServiceUsuario;
@@ -15,29 +10,49 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author johan
+ * Bean para procesar las acciones que se esten realizando en su correspondiente vista.
+ * @author Camilo Tinoco
+ * @author Johan Zambrano
+ * @version 1.0.0
  */
 @Named(value = "registroUsuario")
 @ViewScoped 
 public class RegistroUser implements Serializable{
     
+    /**
+     * Variables de tipo String nombre, apellido, correo, direccion, documento, clave, telefono y titulo para almacenar los atributos de Usuario.
+     */
     private String nombre, apellido, correo, direccion, documento, clave, telefono, titulo;
     
+    /**
+     * Variables de tipo int para almacernar la edad del Usuario
+     */
     private int edad;
     
+    /**
+     * Constructor vacío.
+     */
     public RegistroUser(){
         
     }
     
+    /**
+     * Postconstructor para darle valor a la variable titulo.
+     */
     @PostConstruct
     public void init() {
         this.titulo = "Registro";
     }
     
+    /**
+     * Inyeccion de dependencias para acceder a los atributos y métodos de serviceUsuario.
+     */
     @Inject
     private ServiceUsuario serviceUsuario;
     
+    /**
+     * Método para registrar un usuario.
+     */
     public void registro(){
         List<UsuarioModel> listaUsuarios = serviceUsuario.getListaUsuario();
         listaUsuarios.add(new UsuarioModel(listaUsuarios.size()+1, nombre, apellido, correo, direccion, documento, clave, edad, 2, telefono));

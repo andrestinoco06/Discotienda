@@ -9,17 +9,35 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- *
- * @author johan
+ * Modelo para almacenar los atributos de Artista
+ * @author Camilo Tinoco
+ * @author Johan Zambrano
  */
 public class Artista implements Serializable {
     
+    /**
+     * Variables tipo String para almacenar los datos nombreArtistico, nombreNacimiento y genero del Artista.
+     */
+    private String nombreArtistico, nombreNacimiento, genero;
+    
+    /**
+     * Variable tipo int para almacenar el dato id del Artista.
+     */
     private int id;
-    private String nombreArtistico;
-    private String nombreNacimiento;
-    private String genero;
+    
+    /**
+     * Variable tipo Date para almacenar el dato fechaNacimiento del Artista.
+     */
     private Date fechaNacimiento;
 
+    /**
+     * Constructor para inicializar los atributos de Artista
+     * @param id
+     * @param nombreArtistico
+     * @param nombreNacimiento
+     * @param genero
+     * @param fechaNacimiento 
+     */
     public Artista(int id, String nombreArtistico, String nombreNacimiento, String genero, Date fechaNacimiento) {
         this.id = id;
         this.nombreArtistico = nombreArtistico;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.unicundi.discotienda;
 
 import edu.unicundi.logic.ServiceArtista;
@@ -19,38 +14,70 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
- *
- * @author johan
+ * Bean para procesar las acciones que se esten realizando en su correspondiente vista.
+ * @author Camilo Tinoco
+ * @author Johan Zambrano
+ * @version 1.0.0
  */
 @Named(value = "login")
 @RequestScoped 
 public class Login implements Serializable{
     
+    /**
+     * Variables de tipo String  que almacenan los datos usuario, clave, titulo de la vista Login.
+     */
     private String usuario, clave, titulo;
     
+    /**
+     * PostConstructor para dar valor a la variable titulo.
+     */
     @PostConstruct
     public void init() {
         System.out.println("entro al post del login");
         this.titulo = "Iniciar Sesión";
     }
     
+    /**
+     * Inyeccion de dependencias para acceder a los atributos y métodos de ServiceArtista.
+     */
     @Inject
     private ServiceArtista serviceArtista;
+    
+    /**
+     * Inyeccion de dependencias para acceder a los atributos y métodos de serviceDisco.
+     */
     @Inject
     private ServiceDisco serviceDisco;
+    
+    /**
+     * Inyeccion de dependencias para acceder a los atributos y métodos de serviceCancion.
+     */
     @Inject
     private ServiceCancion serviceCancion;
+    
+    /**
+     * Inyeccion de dependencias para acceder a los atributos y métodos de serviceUsuario.
+     */
     @Inject
     private ServiceUsuario serviceUsuario;
+    
+    /**
+     * Inyeccion de dependencias para acceder a los atributos y métodos de serviceBusquedaCompra.
+     */
     @Inject
     private ServiceBusquedaCompra serviceBusquedaCompra;
     
+    
+    /**
+     * Método para validar si los datos del usuario que se loguea son correctos para posteriormente direccionar a la página de su respectivo rol.
+     */
     public void iniciarSesion(){
         List<UsuarioModel> listaUsuario = serviceUsuario.getListaUsuario();
         for(int i=0;i<listaUsuario.size();i++){
@@ -78,6 +105,10 @@ public class Login implements Serializable{
         }
     }
     
+    
+    /**
+     * Método para crear los archivos que se usarán como información para la ejecución del proyecto.
+     */
     public void crearArchivos(){
         System.out.println("entro al metodo crearARCHIVOS -------- login");
         try {
@@ -103,6 +134,9 @@ public class Login implements Serializable{
         serviceBusquedaCompra.crearArchivoCarro();
     }
 
+    /**
+     * Método que direcciona a la vista registrarUsuario.
+     */
     public void registrar(){
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("faces/registroUsuario.xhtml");
