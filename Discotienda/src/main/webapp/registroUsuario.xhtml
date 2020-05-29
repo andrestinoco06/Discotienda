@@ -29,37 +29,37 @@
                     <br></br><br></br>
                     <div class="col-1"></div>
                     <div class="col-4 text-center">
-                        <p:inputText id="iNombre" required="true" type="text" class="form-control text-center" a:placeholder="Nombre" label="Nombre"></p:inputText>
+                        <p:inputText id="iNombre" required="true" type="text" value="#{registroUsuario.nombre}" class="form-control text-center" a:placeholder="Nombre" label="Nombre" maxlength="20"></p:inputText>
                         <hr></hr>
                     </div>
                     <div class="col-2"></div>
                     <div class="col-4 text-center">
-                        <p:inputText id="iApellido" required="true" type="text" class="form-control text-center" a:placeholder="Apellido" label="Apellido"></p:inputText>
+                        <p:inputText id="iApellido" required="true" type="text" value="#{registroUsuario.apellido}" class="form-control text-center" a:placeholder="Apellido" maxlength="20" label="Apellido"></p:inputText>
                         <hr></hr>
                     </div>
                     <div class="col-1"></div>
                     <div class="col-1"></div>
                     <div class="col-4 text-center">
-                        <p:inputText id="iCorreo" required="true" type="email" class="form-control text-center" a:placeholder="Correo electrónico" label="Correo electrónico">
+                        <p:inputText id="iCorreo" required="true" type="email" class="form-control text-center" value="#{registroUsuario.correo}" a:placeholder="Correo electrónico" maxlength="30" label="Correo electrónico">
                             <f:validateRegex pattern="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" />
                         </p:inputText>
                         <hr></hr>
                     </div>
                     <div class="col-2"></div>
                     <div class="col-4 text-center">
-                        <p:inputText id="iDireccion" required="true" type="text" class="form-control text-center" a:placeholder="Dirección" label="Dirección"></p:inputText>
+                        <p:inputText id="iDireccion" required="true" type="text" class="form-control text-center" value="#{registroUsuario.direccion}" a:placeholder="Dirección" maxlength="30" label="Dirección"></p:inputText>
                         <hr></hr>
                     </div>
                     <div class="col-1"></div>
                     <div class="col-1"></div>
                     <div class="col-4 text-center">
-                        <p:inputText id="iEdad" required="true" type="number" class="form-control text-center" a:placeholder="Edad" label="Edad">
+                        <p:inputText id="iEdad" required="true" type="number" class="form-control text-center" value="#{registroUsuario.edad}" a:placeholder="Edad" label="Edad">
                             <f:validateDoubleRange minimum="18" maximum="80" />
                         </p:inputText>
                     </div>
                     <div class="col-2"></div>
                     <div class="col-4 text-center">
-                        <p:inputText id="iTelefono" required="true" type="number" class="form-control text-center" a:placeholder="Teléfono" label="Teléfono">
+                        <p:inputText id="iTelefono" required="true" type="number" class="form-control text-center" a:placeholder="Teléfono" value="#{registroUsuario.telefono}" label="Teléfono">
                             <f:validateRegex pattern="\d{7,12}" />
                         </p:inputText>
                     </div>
@@ -71,18 +71,18 @@
                     </div>
                     <div class="col-1"></div>
                     <div class="col-4 text-center">
-                        <p:inputText id="iDocumento" required="true" type="number" class="form-control text-center" a:placeholder="Documento de identidad" label="Documento de identidad">
+                        <p:inputText id="iDocumento" required="true" type="number" value="#{registroUsuario.documento}" class="form-control text-center" a:placeholder="Documento de identidad" label="Documento de identidad">
                             <f:validateRegex pattern="\d{8,12}" />
                         </p:inputText>
                     </div>
                     <div class="col-2"></div>
                     <div class="col-4 text-center">
-                        <p:password id="iContrasena" required="true" feedback="true" class="form-control text-center w-100" a:placeholder="Contraseña" label="Contraseña" inline="true"/>
+                        <p:password id="iContrasena" required="true" feedback="true" value="#{registroUsuario.clave}" maxlength="20"  class="form-control text-center w-100" a:placeholder="Contraseña" label="Contraseña" inline="true"/>
                     </div>
                     <div class="col-1"></div>
                     <br></br><br></br>
                     <div class="col-12 text-center">
-                        <p:commandButton class="btn btn-info" value="Registrar" validateClient="true" update="form" icon="pi pi-save"></p:commandButton>
+                        <p:commandButton class="btn btn-info" value="Registrar" actionListener="#{registroUsuario.registro()}" validateClient="true" update="form" icon="pi pi-save"></p:commandButton>
                     </div>
                     <div class="col-12 text-center">
                         <br></br>

@@ -51,9 +51,6 @@ public class ArtistasAdministrador implements Serializable{
     @Inject
     private ServiceArtista serviceArtista;
     
-    @Inject
-    private ServiceUsuario serviceUsuario;
-    
     @PostConstruct
     public void init() {
         this.listaArtista = serviceArtista.getListaArtista();

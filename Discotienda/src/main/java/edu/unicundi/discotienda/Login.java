@@ -86,15 +86,31 @@ public class Login implements Serializable{
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("entro al metodo crearARCHIVOS -------- login2");
-        serviceDisco.crearArchicoDisco();
+        try {
+            serviceDisco.crearArchicoDisco();
+        } catch (ParseException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("entro al metodo crearARCHIVOS -------- login3");
-        serviceCancion.crearArchicoCancion();
+        try {
+            serviceCancion.crearArchicoCancion();
+        } catch (ParseException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("entro al metodo crearARCHIVOS -------- login4");
         serviceUsuario.crearUsuario();
         System.out.println("entro al metodo crearARCHIVOS -------- login5");
         serviceBusquedaCompra.crearArchivoCarro();
     }
 
+    public void registrar(){
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("faces/registroUsuario.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(InterfaceAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public String getTitulo() {
         return titulo;
     }

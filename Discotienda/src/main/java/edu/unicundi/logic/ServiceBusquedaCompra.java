@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -55,7 +56,7 @@ public class ServiceBusquedaCompra {
     
     public List<BusquedaCompra> cargarLista(){
         listaCompra = new ArrayList<>();
-        listaCompra.add(new BusquedaCompra(-1, "vacio", "vacio", "vacio", "vacio", 0, 0, "vacio", -1, 0));
+        listaCompra.add(new BusquedaCompra(-1, "vacio", "vacio", "vacio", "vacio", 0, 0, "vacio", -1, 0,0));
         return listaCompra;
     }
     
@@ -82,12 +83,12 @@ public class ServiceBusquedaCompra {
                     List<Disco> listaDisco = serviceDisco.getListaDiscos();
                     for(int q=0;q<listaDisco.size();q++){
                         if(listaDisco.get(q).getIdArtista()==listaUsuario.get(i).getId()){
-                            listaCompra.add(new BusquedaCompra(cont, listaUsuario.get(i).getNombreArtistico(), listaDisco.get(q).getNombreDisco(), "no aplica", listaDisco.get(q).getGenero(), listaDisco.get(q).getDuracion(), listaDisco.get(q).getPrecio(), "DISCO", listaDisco.get(i).getId(), 0));
+                            listaCompra.add(new BusquedaCompra(cont, listaUsuario.get(i).getNombreArtistico(), listaDisco.get(q).getNombreDisco(), "no aplica", listaDisco.get(q).getGenero(), listaDisco.get(q).getDuracion(), listaDisco.get(q).getPrecio(), "DISCO", listaDisco.get(i).getId(), 0, (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idSessionCliente")));
                             cont++;
                             List<Cancion> listaCancion = serviceCancion.getListaCancion();
                             for(int w=0;w<listaCancion.size();w++){
                                 if(listaCancion.get(w).getIdDisco()==listaDisco.get(q).getId()){
-                                    listaCompra.add(new BusquedaCompra(cont, listaUsuario.get(i).getNombreArtistico(), listaDisco.get(q).getNombreDisco(), listaCancion.get(w).getNombreCancion(), listaCancion.get(w).getGenero(), listaCancion.get(w).getDuracionCancion(), listaCancion.get(w).getPrecion(), "CANCIÓN",listaDisco.get(i).getId(), listaCancion.get(w).getId()));
+                                    listaCompra.add(new BusquedaCompra(cont, listaUsuario.get(i).getNombreArtistico(), listaDisco.get(q).getNombreDisco(), listaCancion.get(w).getNombreCancion(), listaCancion.get(w).getGenero(), listaCancion.get(w).getDuracionCancion(), listaCancion.get(w).getPrecion(), "CANCIÓN",listaDisco.get(i).getId(), listaCancion.get(w).getId(), (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idSessionCliente")));
                                     cont++;
                                 }
                             }
@@ -108,7 +109,7 @@ public class ServiceBusquedaCompra {
                             System.out.println("SEGUNDO FOR");
                             if (listaUsuario.get(q).getId() == listaDisco.get(i).getIdArtista()) {
                                 System.out.println("SEGUNDO IF");
-                                listaCompra.add(new BusquedaCompra(cont, listaUsuario.get(q).getNombreArtistico(), listaDisco.get(i).getNombreDisco(), "no aplica", listaDisco.get(i).getGenero(), listaDisco.get(i).getDuracion(), listaDisco.get(i).getPrecio(), "DISCO",listaDisco.get(i).getId(), 0));
+                                listaCompra.add(new BusquedaCompra(cont, listaUsuario.get(q).getNombreArtistico(), listaDisco.get(i).getNombreDisco(), "no aplica", listaDisco.get(i).getGenero(), listaDisco.get(i).getDuracion(), listaDisco.get(i).getPrecio(), "DISCO",listaDisco.get(i).getId(), 0, (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idSessionCliente")));
                                 cont++;
                             }
                         }
@@ -126,7 +127,7 @@ public class ServiceBusquedaCompra {
                                     List<Artista> listaUsuario = serviceArtista.getListaArtista();
                                     for (int q = 0; q < listaUsuario.size(); q++) {
                                         if (listaUsuario.get(q).getId() == listaDisco.get(i).getIdArtista()) {
-                                            listaCompra.add(new BusquedaCompra(cont, listaUsuario.get(q).getNombreArtistico(), listaDisco.get(i).getNombreDisco(), listaCancion.get(w).getNombreCancion(), listaCancion.get(w).getGenero(), listaCancion.get(w).getDuracionCancion(), listaCancion.get(w).getPrecion(), "CANCIÓN", listaDisco.get(i).getId(), listaCancion.get(w).getId()));
+                                            listaCompra.add(new BusquedaCompra(cont, listaUsuario.get(q).getNombreArtistico(), listaDisco.get(i).getNombreDisco(), listaCancion.get(w).getNombreCancion(), listaCancion.get(w).getGenero(), listaCancion.get(w).getDuracionCancion(), listaCancion.get(w).getPrecion(), "CANCIÓN", listaDisco.get(i).getId(), listaCancion.get(w).getId(), (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idSessionCliente")));
                                             cont++;
                                         }
                                     }

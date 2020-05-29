@@ -30,6 +30,7 @@
                                 <h5 class="card-title">Contraseña</h5>
                                 <p:inputText type="password"  class="form-control text-center" required="true" value="#{login.clave}"></p:inputText>
                                 <p:commandButton class="mt-4 btn btn-info" value="Iniciar sesión" validateClient="true" icon="pi pi-home" actionListener="#{login.iniciarSesion()}"></p:commandButton>
+                                <p:commandButton class="mt-4 btn btn-info" value="Registrar" immediate="true" icon="pi pi-home" actionListener="#{login.registrar()}"></p:commandButton>
                             </div>
                             <div class="card-footer text-muted">&copy;
                                 2020

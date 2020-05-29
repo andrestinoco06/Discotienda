@@ -13,11 +13,11 @@ import java.io.Serializable;
  */
 public class BusquedaCompra implements Serializable{
     
-    private int id, idDisco, idCancion;
+    private int id, idDisco, idCancion, idUsuario;
     private String nombreArtista, nombreDisco, nombreCancion, genero, tipo;
     private long duracion, precio;
 
-    public BusquedaCompra(int id, String nombreArtista, String nombreDisco, String nombreCancion, String genero, long duracion, long precio, String tipo, int idDisco, int idCancion) {
+    public BusquedaCompra(int id, String nombreArtista, String nombreDisco, String nombreCancion, String genero, long duracion, long precio, String tipo, int idDisco, int idCancion, int idUsuario) {
         this.id = id;
         this.nombreArtista = nombreArtista;
         this.nombreDisco = nombreDisco;
@@ -28,6 +28,7 @@ public class BusquedaCompra implements Serializable{
         this.tipo = tipo;
         this.idDisco = idDisco;
         this.idCancion = idCancion;
+        this.idUsuario = idUsuario;
     }
     
     public int getId() {
@@ -108,5 +109,13 @@ public class BusquedaCompra implements Serializable{
 
     public void setIdCancion(int idCancion) {
         this.idCancion = idCancion;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }
