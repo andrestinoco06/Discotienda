@@ -28,6 +28,8 @@ public class ServiceBusquedaCompra {
     
     private List<BusquedaCompra> listaCompra;
     
+    private List<BusquedaCompra> listaHistoria;
+    
     private String nombre, tipo;
     
     public ServiceBusquedaCompra(){
@@ -36,7 +38,7 @@ public class ServiceBusquedaCompra {
     
     @PostConstruct
     public void init() {
-        listaCompra = new lecturaEscrituraCarrito().verCarro();
+        //listaCompra = new lecturaEscrituraCarrito().verCarro();
     }
     
     @Inject
@@ -53,7 +55,7 @@ public class ServiceBusquedaCompra {
     
     public List<BusquedaCompra> cargarLista(){
         listaCompra = new ArrayList<>();
-        listaCompra.add(new BusquedaCompra(-1, "vacio", "vacio", "vacio", "vacio", 0, 0, "vacio", -1));
+        listaCompra.add(new BusquedaCompra(-1, "vacio", "vacio", "vacio", "vacio", 0, 0, "vacio", -1, 0));
         return listaCompra;
     }
     
@@ -62,16 +64,17 @@ public class ServiceBusquedaCompra {
         new lecturaEscrituraCarrito().agregarCarro(lista);
     }
     
-    public List<BusquedaCompra> verCarrito(){
-        return new lecturaEscrituraCarrito().verCarro();
-    }
-    
     public void agregarCarrito(List<BusquedaCompra> agregarCarrito){
         new lecturaEscrituraCarrito().agregarCarro(agregarCarrito);
     }
     
+    public List<BusquedaCompra> historialUsuario(){
+        return new lecturaEscrituraCarrito().verCarro();
+    }
+    
     public List<BusquedaCompra> realizarBusqueda(String nombre, String tipo){
         listaCompra = new ArrayList<>();
+        int cont=1;
         if (tipo.equals("1")) {
             List<Artista> listaUsuario = serviceArtista.getListaArtista();
             for (int i = 0; i < listaUsuario.size(); i++) {
@@ -79,11 +82,13 @@ public class ServiceBusquedaCompra {
                     List<Disco> listaDisco = serviceDisco.getListaDiscos();
                     for(int q=0;q<listaDisco.size();q++){
                         if(listaDisco.get(q).getIdArtista()==listaUsuario.get(i).getId()){
-                            listaCompra.add(new BusquedaCompra(listaDisco.get(i).getId(), listaUsuario.get(i).getNombreArtistico(), listaDisco.get(q).getNombreDisco(), "no aplica", listaDisco.get(q).getGenero(), listaDisco.get(q).getDuracion(), listaDisco.get(q).getPrecio(), "DISCO",-1));
+                            listaCompra.add(new BusquedaCompra(cont, listaUsuario.get(i).getNombreArtistico(), listaDisco.get(q).getNombreDisco(), "no aplica", listaDisco.get(q).getGenero(), listaDisco.get(q).getDuracion(), listaDisco.get(q).getPrecio(), "DISCO", listaDisco.get(i).getId(), 0));
+                            cont++;
                             List<Cancion> listaCancion = serviceCancion.getListaCancion();
                             for(int w=0;w<listaCancion.size();w++){
                                 if(listaCancion.get(w).getIdDisco()==listaDisco.get(q).getId()){
-                                    listaCompra.add(new BusquedaCompra(listaCancion.get(w).getId(), listaUsuario.get(i).getNombreArtistico(), listaDisco.get(q).getNombreDisco(), listaCancion.get(w).getNombreCancion(), listaCancion.get(w).getGenero(), listaCancion.get(w).getDuracionCancion(), listaCancion.get(w).getPrecion(), "CANCIÓN",listaDisco.get(i).getId()));
+                                    listaCompra.add(new BusquedaCompra(cont, listaUsuario.get(i).getNombreArtistico(), listaDisco.get(q).getNombreDisco(), listaCancion.get(w).getNombreCancion(), listaCancion.get(w).getGenero(), listaCancion.get(w).getDuracionCancion(), listaCancion.get(w).getPrecion(), "CANCIÓN",listaDisco.get(i).getId(), listaCancion.get(w).getId()));
+                                    cont++;
                                 }
                             }
                         }
@@ -103,7 +108,8 @@ public class ServiceBusquedaCompra {
                             System.out.println("SEGUNDO FOR");
                             if (listaUsuario.get(q).getId() == listaDisco.get(i).getIdArtista()) {
                                 System.out.println("SEGUNDO IF");
-                                listaCompra.add(new BusquedaCompra(listaDisco.get(i).getId(), listaUsuario.get(q).getNombreArtistico(), listaDisco.get(i).getNombreDisco(), "no aplica", listaDisco.get(i).getGenero(), listaDisco.get(i).getDuracion(), listaDisco.get(i).getPrecio(), "DISCO", -1));
+                                listaCompra.add(new BusquedaCompra(cont, listaUsuario.get(q).getNombreArtistico(), listaDisco.get(i).getNombreDisco(), "no aplica", listaDisco.get(i).getGenero(), listaDisco.get(i).getDuracion(), listaDisco.get(i).getPrecio(), "DISCO",listaDisco.get(i).getId(), 0));
+                                cont++;
                             }
                         }
                     }
@@ -120,7 +126,8 @@ public class ServiceBusquedaCompra {
                                     List<Artista> listaUsuario = serviceArtista.getListaArtista();
                                     for (int q = 0; q < listaUsuario.size(); q++) {
                                         if (listaUsuario.get(q).getId() == listaDisco.get(i).getIdArtista()) {
-                                            listaCompra.add(new BusquedaCompra(listaDisco.get(i).getId(), listaUsuario.get(q).getNombreArtistico(), listaDisco.get(i).getNombreDisco(), listaCancion.get(w).getNombreCancion(), listaCancion.get(w).getGenero(), listaCancion.get(w).getDuracionCancion(), listaCancion.get(w).getPrecion(), "CANCIÓN", listaDisco.get(i).getId()));
+                                            listaCompra.add(new BusquedaCompra(cont, listaUsuario.get(q).getNombreArtistico(), listaDisco.get(i).getNombreDisco(), listaCancion.get(w).getNombreCancion(), listaCancion.get(w).getGenero(), listaCancion.get(w).getDuracionCancion(), listaCancion.get(w).getPrecion(), "CANCIÓN", listaDisco.get(i).getId(), listaCancion.get(w).getId()));
+                                            cont++;
                                         }
                                     }
                                 }
@@ -155,6 +162,14 @@ public class ServiceBusquedaCompra {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public List<BusquedaCompra> getListaHistoria() {
+        return listaHistoria;
+    }
+
+    public void setListaHistoria(List<BusquedaCompra> listaHistoria) {
+        this.listaHistoria = listaHistoria;
     }
     
     

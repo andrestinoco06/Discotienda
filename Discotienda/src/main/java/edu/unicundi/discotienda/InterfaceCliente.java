@@ -25,7 +25,7 @@ import javax.inject.Named;
 @Named(value = "interfaceCliente")
 @ViewScoped
 public class InterfaceCliente implements Serializable {
-    
+
     private String nombre;
 
     @Inject
@@ -34,43 +34,42 @@ public class InterfaceCliente implements Serializable {
     @PostConstruct
     public void init() {
         if (serviceUsuario.validacionCliente()) {
-            int id = (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idSessionAdministrador");
+            int id = (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idSessionCliente");
             List<UsuarioModel> lista = serviceUsuario.getListaUsuario();
-            System.out.println(" -- " + lista.get(id).getId() + " --- " + id);
             for (int i = 0; i < lista.size(); i++) {
                 if (lista.get(i).getId() == id) {
-                    nombre = lista.get(id).getNombre() + lista.get(id).getApellido();
+                    nombre = lista.get(i).getNombre() + " " + lista.get(i).getApellido();
                 }
             }
         }
     }
 
-    public void inicio(){
+    public void inicio() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("bienvenidaCliente.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(InterfaceCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void comprar(){
+
+    public void comprar() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("compra.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(InterfaceCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
-    public void carrito(){
+
+    public void carrito() {
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("carrito.xhtml");
         } catch (IOException ex) {
             Logger.getLogger(InterfaceCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void cerrarSesion(){
+
+    public void cerrarSesion() {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("sessionCliente", false);
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("idSessionCliente", null);
         try {
@@ -79,7 +78,15 @@ public class InterfaceCliente implements Serializable {
             Logger.getLogger(InterfaceAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    public void historialDeCompras() {
+        try {
+            FacesContext.getCurrentInstance().getExternalContext().redirect("historialCompraUsuario.xhtml");
+        } catch (IOException ex) {
+            Logger.getLogger(InterfaceCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -87,6 +94,5 @@ public class InterfaceCliente implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    
+
 }

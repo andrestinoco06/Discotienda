@@ -34,15 +34,11 @@ public class InterfaceAdmin implements Serializable {
     @PostConstruct
     public void init() {
         if (serviceUsuario.validacionUsuario()) {
-            System.out.println("entro al post de interface");
             int id = (int) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("idSessionAdministrador");
-            System.out.println("--- " + id);
             List<UsuarioModel> lista = serviceUsuario.getListaUsuario();
-            System.out.println(" -- " + lista.get(id).getId() + " --- " + id);
             for (int i = 0; i < lista.size(); i++) {
                 if (lista.get(i).getId() == id) {
-                    System.out.println("encontro en el post de interface");
-                    nombre = lista.get(id).getNombre() + lista.get(id).getApellido();
+                    nombre = lista.get(i).getNombre() + " " +lista.get(i).getApellido();
                 }
             }
         }

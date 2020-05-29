@@ -63,18 +63,24 @@ public class Compra implements Serializable {
             if (busqueda.getTipo().equals("DISCO")) {
                 System.out.println("Entro disco");
                 for (int i = 0; i < carrito.size(); i++) {
-                    if (carrito.get(i).getId() == busqueda.getId()) {
+                    if (carrito.get(i).getIdDisco()== busqueda.getIdDisco() && carrito.get(i).getTipo().equals("DISCO")) {
                         System.out.println("encontro el mismo disco registrado");
                         validacion = 2;
                     }
                 }
+                List<BusquedaCompra> listaProvisional = new ArrayList<>();
                 for (int q = 0; q < carrito.size(); q++) {
-                    if (carrito.get(q).getIdDisco() == busqueda.getId()) {
+                    System.out.println(" carrito "+ carrito.size());
+                    System.out.println("  " + carrito.get(q).getIdDisco() + " = " + busqueda.getIdDisco() + "  -  " +carrito.get(q).getTipo());
+                    if (carrito.get(q).getIdDisco() == busqueda.getIdDisco() && carrito.get(q).getTipo().equals("CANCIÓN")) {
                         System.out.println("Entro a borrar las canciones que ya estan registradas");
-                        validacion = 3;
-                        carrito.remove(q);
+                        System.out.println("  " + carrito.get(q).getIdDisco() + " - " + busqueda.getIdDisco() + "  -  " +carrito.get(q).getTipo());
+                        System.out.println(" - disco: "+ carrito.get(q).getNombreDisco() + "  - cancion: "+ carrito.get(q).getNombreCancion());
+                    }else{
+                        listaProvisional.add(carrito.get(q));
                     }
                 }
+                carrito = listaProvisional;
             }
             if (busqueda.getTipo().equals("CANCIÓN")) {
                 System.out.println("Entro cancion");
@@ -91,6 +97,7 @@ public class Compra implements Serializable {
                     }
                 }
             }
+            System.out.println(" validacion "+ validacion);
             if (validacion == 4) {
                 FacesMessage msg = new FacesMessage("ERROR, LA CANCIÓN SELECCIONADA YA SE ENCUENTRA AGREGADA POR UN DISCO.");
                 FacesContext.getCurrentInstance().addMessage(null, msg);

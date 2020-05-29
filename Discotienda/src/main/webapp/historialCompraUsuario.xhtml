@@ -6,7 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
 
-        <title>Carrito</title>
+        <title>Historial Usuario</title>
         <h:outputStylesheet library="css" name="bootstrap.css" />
         <h:outputScript library="js" name="bootstrap.js" />
         <h:outputScript library="js" name="jquery-3.5.0.min.js" />
@@ -99,9 +99,6 @@
                     <li class="nav-item">
                         <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Carrito" actionListener="#{interfaceCliente.carrito()}" style="width:100%"/>
                     </li>
-                    <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Historial de compras" actionListener="#{interfaceCliente.historialDeCompras()}" style="width:100%"/>
-                    </li>
                     <li></li>
                     <li class="nav-item">
                         <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Cerrar Session" actionListener="#{interfaceCliente.cerrarSesion()}" style="width:100%"/>
@@ -115,7 +112,7 @@
                     <small class="text-uppercase font-weight-bold">Menú</small>
                 </button>
                 
-                <p:dataTable id="DT_busqueda" value="#{carritoUsuario.listaCarrito}" var ="busqueda" paginator="true" editable="true">
+                <p:dataTable id="DT_busqueda" value="#{historialCompra.listaCarrito}" var ="busqueda" paginator="true" editable="true">
 
                     <f:facet name="header">
                         CARRITO
@@ -157,14 +154,7 @@
                             <f:facet name="input"><p:inputText id="I_tipo" value="#{busqueda.tipo}" style="width:100%"/></f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column headerText="Eliminar">
-                        <h:commandButton value="Eliminar" actionListener="#{carritoUsuario.eliminarCarrito(busqueda)}"/>
-                    </p:column>
                 </p:dataTable>
-                
-                <h:panelGrid id="confirmacion" columns="3" cellpadding="3">
-                    <p:commandButton  icon="pi pi-check" value="Confirmar Compra" validateClient="true" actionListener="#{carritoUsuario.confimarCompra()}"/>                    
-                </h:panelGrid> 
             </div>
 
         </h:form>
