@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.unicundi.discotienda;
 
 import edu.unicundi.lecturaEscritura.lecturaEscrituraCancion;
@@ -33,30 +28,37 @@ import javax.inject.Named;
 @Named(value = "cancionesDisAdmin")
 @ViewScoped
 public class CancionesDiscoAdmin implements Serializable {
-    /*
+    
+    /**
     * Guarda la lista de las canciones que corresponden al Disco seleccionado
     */
     private List<Cancion> listaCancion;
+    
     /**
      * Variable que guarda el id del disco
      */
     private int idDisco;
+    
     /**
      * Variable que guarda el nombre de la canción 
      */
     private String nombreCancion;
+    
     /**
      * Variable que guarda la duración de la cancion
      */
     private int duracion;
-    /*
+    
+    /**
      * Variable de tipo Array que guarda el genero de las canciones
      */
     private String[] genero;
+    
     /**
      * Variable de tipo Date que guarda la fecha de publicacion
      */
     private Date fechaPublicacion;
+    
     /**
      * Variable que guarda el precio de la canción
      */
@@ -65,15 +67,16 @@ public class CancionesDiscoAdmin implements Serializable {
     /**
      * Constructor vacio principal
      */
-    
     public CancionesDiscoAdmin() {
 
     }
+    
     /**
      * Variable de tipo inject, hace la injeccion a ServiceCancion
      */
     @Inject
     private ServiceCancion serviceCancion;
+    
     /**
      * PostConstruct que carga las canciones respectivas
      */
@@ -81,6 +84,7 @@ public class CancionesDiscoAdmin implements Serializable {
     public void init() {
         cargarCanciones();
     }
+    
     /**
      * Funcion que carga las canciones que corresponde al disco
      */
@@ -103,6 +107,7 @@ public class CancionesDiscoAdmin implements Serializable {
             }
         }
     }
+    
     /**
      * Crea una canción al disco
      */

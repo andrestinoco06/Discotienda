@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.unicundi.discotienda;
 
 import edu.unicundi.logic.ServiceBusquedaCompra;
@@ -23,20 +18,24 @@ import javax.inject.Named;
 @Named(value = "carritoUsuario")
 @ViewScoped
 public class Carrito implements Serializable{
+    
     /**
      * Variable de tipo List que almacena todos los productos que se han seleccionado 
      */
     List<BusquedaCompra> listaCarrito;
+    
     /**
      * Variable de tipo Inject, realiza la injeccion a Compra
      */
     @Inject
     private Compra compra;
+    
     /**
      * Variable de tipo Inject, realiza la injeccion a ServiceBusquedacOMPRA
      */
     @Inject
     private ServiceBusquedaCompra serviceCompra;
+    
     /**
      * PostConstruct, trae toda la información del carrito y la carga en la List
      */
@@ -44,6 +43,7 @@ public class Carrito implements Serializable{
     public void init() {
         listaCarrito = compra.getCarrito();
     }
+    
     /**
      * Elimina un dato del carrito
      * @param eliminar Almacena el dato a eliminar
@@ -53,6 +53,7 @@ public class Carrito implements Serializable{
         System.out.println(" --  "+eliminar.getNombreDisco()+" "+eliminar.getNombreArtista());
         compra.getCarrito().remove(eliminar);
     }
+    
     /**
      * Función que confirma la compra del usuario
      */

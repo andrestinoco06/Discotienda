@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package edu.unicundi.discotienda;
 
 import edu.unicundi.logic.ServiceCancion;
@@ -29,22 +24,26 @@ import javax.inject.Named;
 @Named(value = "cancionesAdministrador")
 @ViewScoped 
 public class CancionesAdministrador implements Serializable{
-    /*
+    
+    /**
     * Guarda la lista de todas las canciones
     */
     private List<Cancion> listaCancion;
-    /*
+    
+    /**
     * Constructor vacio
     */
     public CancionesAdministrador (){
         
     }
-    /*
+    
+    /**
     * Variable que realiza la injeccion al ServiceCancion
     */
     @Inject
     private ServiceCancion serviceCancion;
-    /*
+    
+    /**
     *PostConstructor que realiza la busqueda de todas las canciones que pertenecen al disco
     */
     @PostConstruct
