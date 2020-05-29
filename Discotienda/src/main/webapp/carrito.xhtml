@@ -90,21 +90,21 @@
 
                 <ul class="nav flex-column bg-black mb-0" onmousedown="true">
                     <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Inicio" actionListener="#{interfaceCliente.inicio()}" style="width:100%"/>
+                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Inicio" actionListener="#{interfaceCliente.inicio()}" style="width:100%" immediate="true"/>
                     </li>
                     <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Comprar" actionListener="#{interfaceCliente.comprar()}" style="width:100%"/>
-                    </li>
-                    <li></li>
-                    <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Carrito" actionListener="#{interfaceCliente.carrito()}" style="width:100%"/>
-                    </li>
-                    <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Historial de compras" actionListener="#{interfaceCliente.historialDeCompras()}" style="width:100%"/>
+                        <h:commandButton class="btn btn-lg btn-block font-italic" value="Comprar" actionListener="#{interfaceCliente.comprar()}" style="width:100%" immediate="true"/>
                     </li>
                     <li></li>
                     <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Cerrar Session" actionListener="#{interfaceCliente.cerrarSesion()}" style="width:100%"/>
+                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Carrito" actionListener="#{interfaceCliente.carrito()}" style="width:100%" immediate="true"/>
+                    </li>
+                    <li class="nav-item">
+                        <h:commandButton class="btn btn-lg btn-block font-italic" value="Historial de compras" actionListener="#{interfaceCliente.historialDeCompras()}" style="width:100%" immediate="true"/>
+                    </li>
+                    <li></li>
+                    <li class="nav-item">
+                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Cerrar Session" actionListener="#{interfaceCliente.cerrarSesion()}" style="width:100%" immediate="true"/>
                     </li>
                     
                 </ul>

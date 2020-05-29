@@ -90,18 +90,21 @@
 
                 <ul class="nav flex-column bg-black mb-0" onmousedown="true">
                     <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Inicio" actionListener="#{interfaceCliente.inicio()}" style="width:100%"/>
+                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Inicio" actionListener="#{interfaceCliente.inicio()}" style="width:100%" immediate="true"/>
                     </li>
                     <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Comprar" actionListener="#{interfaceCliente.comprar()}" style="width:100%"/>
-                    </li>
-                    <li></li>
-                    <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Carrito" actionListener="#{interfaceCliente.carrito()}" style="width:100%"/>
+                        <h:commandButton class="btn btn-lg btn-block font-italic" value="Comprar" actionListener="#{interfaceCliente.comprar()}" style="width:100%" immediate="true"/>
                     </li>
                     <li></li>
                     <li class="nav-item">
-                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Cerrar Session" actionListener="#{interfaceCliente.cerrarSesion()}" style="width:100%"/>
+                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Carrito" actionListener="#{interfaceCliente.carrito()}" style="width:100%" immediate="true"/>
+                    </li>
+                    <li class="nav-item">
+                        <h:commandButton class="btn btn-lg btn-block font-italic" value="Historial de compras" actionListener="#{interfaceCliente.historialDeCompras()}" style="width:100%" immediate="true"/>
+                    </li>
+                    <li></li>
+                    <li class="nav-item">
+                        <h:commandButton class="btn btn-light btn-lg btn-block font-italic" value="Cerrar Session" actionListener="#{interfaceCliente.cerrarSesion()}" style="width:100%" immediate="true"/>
                     </li>
                     
                 </ul>
@@ -112,11 +115,14 @@
                     <small class="text-uppercase font-weight-bold">Menú</small>
                 </button>
                 
-                <h:panelGrid id="busqueda" columns="3" cellpadding="3">
-
+                <br></br>
+                <br></br>
+                
+                <div class="text-center">
+                    <h2 class="text-success">Bienvenido a la discotienda, acá encontrarás todas las canciones que quieras agregar a tu historial de compras</h2>
                     
-                    
-                </h:panelGrid> 
+                    <h:graphicImage class="card-img-top" url="resources/imagenes/Musica.png"  height="450px"></h:graphicImage>
+                </div>
                 
             </div>
         </h:form>
