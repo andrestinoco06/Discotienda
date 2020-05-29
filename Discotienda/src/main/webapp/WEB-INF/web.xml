@@ -27,8 +27,12 @@
         <welcome-file>faces/login.xhtml</welcome-file>
     </welcome-file-list>
     
-    <mime-mapping>
-        <extension>eot</extension>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/faces/paginaNoEncontrada.xhtml</location>
+    </error-page>
+    
+    <!--    <extension>eot</extension>
         <mime-type>application/vnd.ms-fontobject</mime-type>
     </mime-mapping>
     <mime-mapping>
@@ -47,5 +51,5 @@
         <extension>svg</extension>
         <mime-type>image/svg+xml</mime-type>
     </mime-mapping>
-        
+    -->
 </web-app>
